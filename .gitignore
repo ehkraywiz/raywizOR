@@ -45,6 +45,7 @@ dive.log
 yarn-error.log
 local.properties
 **/yarn.lock
+.env
 
 # File extensions
 *.mbtiles

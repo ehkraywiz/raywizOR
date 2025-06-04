@@ -63,7 +63,9 @@ public class LidarAsset extends Asset<LidarAsset> {
 
     public enum VehicleType {
         VEHICLE,
-        LARGE_VEHICLE
+        LARGE_VEHICLE,
+        BICYCLE,
+        PERSON
     }
 
     public static final ValueDescriptor<VehicleType> VEHICLE_TYPE_VALUE = new ValueDescriptor<>("vehicleType", VehicleType.class);
@@ -71,25 +73,25 @@ public class LidarAsset extends Asset<LidarAsset> {
     public static final AttributeDescriptor<VehicleType> VEHICLE_TYPE = new AttributeDescriptor<>("vehicleType",   VEHICLE_TYPE_VALUE);
 
     public static final AttributeDescriptor<String> vendor      = new AttributeDescriptor<>("Vendor",           ValueType.TEXT);
-    public static final AttributeDescriptor<String> thing        = new AttributeDescriptor<>("Type",             ValueType.TEXT);
+    public static final AttributeDescriptor<String> thing       = new AttributeDescriptor<>("Type",             ValueType.TEXT);
     public static final AttributeDescriptor<String> sensor      = new AttributeDescriptor<>("Sensor",           ValueType.TEXT);
     public static final AttributeDescriptor<Date>   dateTime    = new AttributeDescriptor<>("Dato",             ValueType.DATE_AND_TIME);
-    public static final AttributeDescriptor<Integer> HEADING = new AttributeDescriptor<>("Retning", ValueType.POSITIVE_INTEGER,
+    public static final AttributeDescriptor<Double> HEADING     = new AttributeDescriptor<>("Retning", ValueType.NUMBER,
             new MetaItem<>(MetaItemType.READ_ONLY))
             .withUnits(UNITS_DEGREE);
-    public static final AttributeDescriptor<Integer> LONGITUDE = new AttributeDescriptor<>("Breddegrad", ValueType.POSITIVE_INTEGER,
+    public static final AttributeDescriptor<Double> LONGITUDE   = new AttributeDescriptor<>("Breddegrad", ValueType.NUMBER,
             new MetaItem<>(MetaItemType.READ_ONLY))
             .withUnits(UNITS_DEGREE);
-    public static final AttributeDescriptor<Integer> LATITUDE = new AttributeDescriptor<>("Lengdegrad", ValueType.POSITIVE_INTEGER,
+    public static final AttributeDescriptor<Double> LATITUDE    = new AttributeDescriptor<>("Lengdegrad", ValueType.NUMBER,
             new MetaItem<>(MetaItemType.READ_ONLY))
             .withUnits(UNITS_DEGREE);
-    public static final AttributeDescriptor<Integer> VELOCITY = new AttributeDescriptor<>("Hastighet", ValueType.POSITIVE_INTEGER,
+    public static final AttributeDescriptor<Double> VELOCITY    = new AttributeDescriptor<>("Hastighet", ValueType.NUMBER,
             new MetaItem<>(MetaItemType.READ_ONLY))
             .withUnits(UNITS_KILO, UNITS_METRE,UNITS_HOUR);
-    public static final AttributeDescriptor<Integer> DENM = new AttributeDescriptor<>("DENM", ValueType.POSITIVE_INTEGER,
+    public static final AttributeDescriptor<Integer> DENM       = new AttributeDescriptor<>("DENM", ValueType.POSITIVE_INTEGER,
             new MetaItem<>(MetaItemType.READ_ONLY));
-    //public static final AttributeDescriptor<String> unit        = new AttributeDescriptor<>("Måleenhet",        ValueType.TEXT);
-    //public static final AttributeDescriptor<String> extra       = new AttributeDescriptor<>("Melding",          ValueType.TEXT);
+    public static final AttributeDescriptor<String> unit        = new AttributeDescriptor<>("Maaleenhet",        ValueType.TEXT);
+    public static final AttributeDescriptor<String> extra       = new AttributeDescriptor<>("Melding",          ValueType.TEXT);
 
     // TODO:
     //
