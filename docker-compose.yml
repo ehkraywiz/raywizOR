@@ -21,7 +21,7 @@ services:
     ports:
       - "80:80" # Needed for SSL generation using letsencrypt
       - "${OR_SSL_PORT:-443}:443"
-      #- "8883:8883"
+      - "8883:8883"
       - "127.0.0.1:8404:8404" # Localhost metrics access
     volumes:
       - proxy-data:/deployment
@@ -63,8 +63,8 @@ services:
         condition: service_healthy
     ports:
       - "127.0.0.1:8405:8405" # Localhost metrics access
-      - "1883:1883" # For MQTT broker access
-      - "8883:8883"
+      #- "1883:1883" # For MQTT broker access
+      #- "8883:8883"
     environment:
       OR_SETUP_TYPE:
       OR_ADMIN_PASSWORD:
