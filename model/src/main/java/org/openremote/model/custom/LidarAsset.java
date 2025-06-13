@@ -59,8 +59,6 @@ import static org.openremote.model.Constants.UNITS_HOUR;
 public class LidarAsset extends Asset<LidarAsset> {
     public static final AssetDescriptor<LidarAsset> lidarAssetAssetDescriptor = new AssetDescriptor<>("eye-circle", "00aaaa", LidarAsset.class);
 
-
-
     public enum VehicleType {
         VEHICLE,
         LARGE_VEHICLE,
@@ -70,31 +68,29 @@ public class LidarAsset extends Asset<LidarAsset> {
 
     public static final ValueDescriptor<VehicleType> VEHICLE_TYPE_VALUE = new ValueDescriptor<>("vehicleType", VehicleType.class);
 
-    public static final AttributeDescriptor<VehicleType> VEHICLE_TYPE = new AttributeDescriptor<>("vehicleType",   VEHICLE_TYPE_VALUE);
+    public static final AttributeDescriptor<VehicleType> VEHICLE_TYPE = new AttributeDescriptor<>("vehicleType",   VEHICLE_TYPE_VALUE, new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE));
 
-    public static final AttributeDescriptor<String> vendor      = new AttributeDescriptor<>("Vendor",           ValueType.TEXT);
-    public static final AttributeDescriptor<String> thing       = new AttributeDescriptor<>("Type",             ValueType.TEXT);
-    public static final AttributeDescriptor<String> sensor      = new AttributeDescriptor<>("Sensor",           ValueType.TEXT);
-    public static final AttributeDescriptor<Date>   dateTime    = new AttributeDescriptor<>("Dato",             ValueType.DATE_AND_TIME);
-    public static final AttributeDescriptor<Double> HEADING     = new AttributeDescriptor<>("Retning", ValueType.NUMBER,
-            new MetaItem<>(MetaItemType.READ_ONLY))
+    public static final AttributeDescriptor<String> vendor      = new AttributeDescriptor<>("Vendor",           ValueType.TEXT, new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE));
+    public static final AttributeDescriptor<String> thing       = new AttributeDescriptor<>("Type",             ValueType.TEXT, new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE));
+    public static final AttributeDescriptor<String> sensor      = new AttributeDescriptor<>("Sensor",           ValueType.TEXT, new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE));
+    public static final AttributeDescriptor<Date>   dateTime    = new AttributeDescriptor<>("Dato",             ValueType.DATE_AND_TIME, new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE));
+    public static final AttributeDescriptor<Double> HEADING     = new AttributeDescriptor<>("Retning",          ValueType.NUMBER,
+            new MetaItem<>(MetaItemType.READ_ONLY), new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE))
             .withUnits(UNITS_DEGREE);
-    public static final AttributeDescriptor<Double> LONGITUDE   = new AttributeDescriptor<>("Breddegrad", ValueType.NUMBER,
-            new MetaItem<>(MetaItemType.READ_ONLY))
+    public static final AttributeDescriptor<Double> LONGITUDE   = new AttributeDescriptor<>("Breddegrad",       ValueType.NUMBER,
+            new MetaItem<>(MetaItemType.READ_ONLY), new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE))
             .withUnits(UNITS_DEGREE);
-    public static final AttributeDescriptor<Double> LATITUDE    = new AttributeDescriptor<>("Lengdegrad", ValueType.NUMBER,
-            new MetaItem<>(MetaItemType.READ_ONLY))
+    public static final AttributeDescriptor<Double> LATITUDE    = new AttributeDescriptor<>("Lengdegrad",       ValueType.NUMBER,
+            new MetaItem<>(MetaItemType.READ_ONLY), new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE))
             .withUnits(UNITS_DEGREE);
-    public static final AttributeDescriptor<Double> VELOCITY    = new AttributeDescriptor<>("Hastighet", ValueType.NUMBER,
-            new MetaItem<>(MetaItemType.READ_ONLY))
+    public static final AttributeDescriptor<Double> VELOCITY    = new AttributeDescriptor<>("Hastighet",        ValueType.NUMBER,
+            new MetaItem<>(MetaItemType.READ_ONLY), new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE))
             .withUnits(UNITS_KILO, UNITS_METRE,UNITS_HOUR);
-    public static final AttributeDescriptor<Integer> DENM       = new AttributeDescriptor<>("DENM", ValueType.POSITIVE_INTEGER,
-            new MetaItem<>(MetaItemType.READ_ONLY));
-    public static final AttributeDescriptor<String> unit        = new AttributeDescriptor<>("Maaleenhet",        ValueType.TEXT);
-    public static final AttributeDescriptor<String> extra       = new AttributeDescriptor<>("Melding",          ValueType.TEXT);
+    public static final AttributeDescriptor<Integer> DENM       = new AttributeDescriptor<>("DENM",             ValueType.POSITIVE_INTEGER,
+            new MetaItem<>(MetaItemType.READ_ONLY), new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE));
+    public static final AttributeDescriptor<String> unit        = new AttributeDescriptor<>("Maaleenhet",       ValueType.TEXT, new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE));
+    public static final AttributeDescriptor<String> extra       = new AttributeDescriptor<>("Melding",          ValueType.TEXT, new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE));
 
-    // TODO:
-    //
 
 
     public Optional<VehicleType> getVehicleType() {
