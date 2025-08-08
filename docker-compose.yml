@@ -24,6 +24,7 @@ services:
       - "127.0.0.1:8404:8404" # Localhost metrics access
     volumes:
       - proxy-data:/deployment
+      - ./deployment/haproxy.cfg:/data/proxy/haproxy.cfg
     environment:
       LE_EMAIL: ${OR_EMAIL_ADMIN:-}
       DOMAINNAME: ${OR_HOSTNAME:-localhost}
@@ -88,16 +89,13 @@ services:
     volumes:
       - manager-data:/storage
 
-  mbtileserver:
+  tileserver:
     environment:
       VERBOSE: true
       AUTO-TLS: true
       PORT: "9876"
     image: ghcr.io/consbio/mbtileserver:latest
-    depends_on:
-      proxy:
-        condition: service_healthy
-    container_name: mbtileserver
+    container_name: tileserver
     entrypoint: /mbtileserver --enable-reload-signal --verbose
     restart: always
     ports:
