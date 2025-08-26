@@ -25,7 +25,7 @@ public class NodeAsset extends Asset<NodeAsset> {
     public static final AttributeDescriptor<Double> longitude = new AttributeDescriptor<>("Lengdegrad", ValueType.NUMBER);
     public static final AttributeDescriptor<Double> azimuth = new AttributeDescriptor<>("Azimut",ValueType.NUMBER);
     public static final AttributeDescriptor<Double> cpuUtilization = new AttributeDescriptor<>("CPUBelastning", ValueType.NUMBER, new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
-    public static final AttributeDescriptor<Integer> availableMemory = new AttributeDescriptor<>("TilgjengeligMinne", ValueType.POSITIVE_INTEGER, new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+    public static final AttributeDescriptor<Double> availableMemory = new AttributeDescriptor<>("TilgjengeligMinne", ValueType.NUMBER, new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
     public static final AttributeDescriptor<Integer> availableStorage = new AttributeDescriptor<>("TilgjengeligLagringsplass", ValueType.POSITIVE_INTEGER, new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
 
 
