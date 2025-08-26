@@ -24,10 +24,5 @@ rules.add()
                     def updates = facts.bound("updates") as List<AttributeEvent>
                     updates.forEach { event ->
                         assets.dispatch(event) }
-
-                    // This used to be a Thread.sleep() but one test requires the wait to be non interruptible
-                    long startTime = System.currentTimeMillis()
-                    while ((System.currentTimeMillis() - startTime) < 600) {
-                        // Busy wait for 600ms - cannot be interrupted
-                    }
+                    Thread.sleep(600)
                 })
