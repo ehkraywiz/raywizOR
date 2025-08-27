@@ -1,0 +1,243 @@
+{
+  "version": 1,
+  "createdOn": 1756276116093,
+  "name": "122216002408",
+  "accessPublicRead": false,
+  "realm": "vegvesen",
+  "type": "LidarAsset",
+  "attributes": {
+    "SensorID": {
+      "name": "SensorID",
+      "type": "text",
+      "meta": {
+        "storeDataPoints": true,
+        "accessRestrictedWrite": true,
+        "agentLink": {
+          "id": "4A2BAZMqOrtGhYOk3pj4Sm",
+          "valueFilters": [
+            {
+              "type": "jsonPath",
+              "path": "$.diagnostics.lidar.sid",
+              "returnFirst": false,
+              "returnLast": false
+            }
+          ],
+          "subscriptionTopic": "system/sensors/122216002408",
+          "type": "MQTTAgentLink"
+        }
+      },
+      "value": null,
+      "timestamp": 1756276514260
+    },
+    "Temperatur": {
+      "name": "Temperatur",
+      "type": "number",
+      "meta": {
+        "agentLink": {
+          "id": "4A2BAZMqOrtGhYOk3pj4Sm",
+          "valueFilters": [
+            {
+              "type": "jsonPath",
+              "path": "$.diagnostics.lidar.temp",
+              "returnFirst": false,
+              "returnLast": false
+            }
+          ],
+          "subscriptionTopic": "system/sensors/122216002408",
+          "type": "MQTTAgentLink"
+        }
+      },
+      "value": null,
+      "timestamp": 1756276514260
+    },
+    "Millivolt": {
+      "name": "Millivolt",
+      "type": "number",
+      "meta": {
+        "agentLink": {
+          "id": "4A2BAZMqOrtGhYOk3pj4Sm",
+          "valueFilters": [
+            {
+              "type": "jsonPath",
+              "path": "$.diagnostics.lidar.mV",
+              "returnFirst": false,
+              "returnLast": false
+            }
+          ],
+          "subscriptionTopic": "system/sensors/122216002408",
+          "type": "MQTTAgentLink"
+        }
+      },
+      "value": null,
+      "timestamp": 1756276514260
+    },
+    "notes": {
+      "name": "notes",
+      "type": "text",
+      "meta": {},
+      "value": null,
+      "timestamp": 1756276116091
+    },
+    "Lengdegrad": {
+      "name": "Lengdegrad",
+      "type": "number",
+      "meta": {
+        "agentLink": {
+          "id": "4A2BAZMqOrtGhYOk3pj4Sm",
+          "valueFilters": [
+            {
+              "type": "jsonPath",
+              "path": "$.diagnostics.lidar.lon",
+              "returnFirst": false,
+              "returnLast": false
+            }
+          ],
+          "subscriptionTopic": "system/sensors/122216002408",
+          "type": "MQTTAgentLink"
+        }
+      },
+      "value": null,
+      "timestamp": 1756276514260
+    },
+    "Veistrekning": {
+      "name": "Veistrekning",
+      "type": "text",
+      "meta": {
+        "storeDataPoints": true,
+        "accessRestrictedWrite": true,
+        "agentLink": {
+          "id": "4A2BAZMqOrtGhYOk3pj4Sm",
+          "valueFilters": [
+            {
+              "type": "jsonPath",
+              "path": "$.diagnostics.lidar.name",
+              "returnFirst": false,
+              "returnLast": false
+            }
+          ],
+          "subscriptionTopic": "system/sensors/122216002408",
+          "type": "MQTTAgentLink"
+        }
+      },
+      "value": null,
+      "timestamp": 1756276514260
+    },
+    "Varsler": {
+      "name": "Varsler",
+      "type": "JSONObject[]",
+      "meta": {
+        "storeDataPoints": true,
+        "agentLink": {
+          "id": "4A2BAZMqOrtGhYOk3pj4Sm",
+          "valueFilters": [
+            {
+              "type": "jsonPath",
+              "path": "$.diagnostics.alerts",
+              "returnFirst": false,
+              "returnLast": false
+            }
+          ],
+          "subscriptionTopic": "system/sensors/122216002408",
+          "type": "MQTTAgentLink"
+        }
+      },
+      "value": null,
+      "timestamp": 1756276514260
+    },
+    "Dato": {
+      "name": "Dato",
+      "type": "dateAndTime",
+      "meta": {
+        "storeDataPoints": true,
+        "accessRestrictedWrite": true,
+        "agentLink": {
+          "id": "4A2BAZMqOrtGhYOk3pj4Sm",
+          "valueFilters": [
+            {
+              "type": "jsonPath",
+              "path": "$.diagnostics.datetime",
+              "returnFirst": false,
+              "returnLast": false
+            }
+          ],
+          "subscriptionTopic": "system/sensors/122216002408",
+          "type": "MQTTAgentLink"
+        }
+      },
+      "value": null,
+      "timestamp": 1756276514260
+    },
+    "Tilt": {
+      "name": "Tilt",
+      "type": "number",
+      "meta": {
+        "agentLink": {
+          "id": "4A2BAZMqOrtGhYOk3pj4Sm",
+          "valueFilters": [
+            {
+              "type": "jsonPath",
+              "path": "$.diagnostics.lidar.tilt",
+              "returnFirst": false,
+              "returnLast": false
+            }
+          ],
+          "subscriptionTopic": "system/sensors/122216002408",
+          "type": "MQTTAgentLink"
+        }
+      },
+      "value": null,
+      "timestamp": 1756276514260
+    },
+    "location": {
+      "name": "location",
+      "type": "GEO_JSONPoint",
+      "meta": {},
+      "value": null,
+      "timestamp": 1756276116091
+    },
+    "Breddegrad": {
+      "name": "Breddegrad",
+      "type": "number",
+      "meta": {
+        "agentLink": {
+          "id": "4A2BAZMqOrtGhYOk3pj4Sm",
+          "valueFilters": [
+            {
+              "type": "jsonPath",
+              "path": "$.diagnostics.lidar.lat",
+              "returnFirst": false,
+              "returnLast": false
+            }
+          ],
+          "subscriptionTopic": "system/sensors/122216002408",
+          "type": "MQTTAgentLink"
+        }
+      },
+      "value": null,
+      "timestamp": 1756276514260
+    },
+    "Sensormodell": {
+      "name": "Sensormodell",
+      "type": "text",
+      "meta": {
+        "storeDataPoints": true,
+        "accessRestrictedWrite": true,
+        "agentLink": {
+          "id": "4A2BAZMqOrtGhYOk3pj4Sm",
+          "valueFilters": [
+            {
+              "type": "jsonPath",
+              "path": "$.diagnostics.lidar.model",
+              "returnFirst": false,
+              "returnLast": false
+            }
+          ],
+          "subscriptionTopic": "system/sensors/122216002408",
+          "type": "MQTTAgentLink"
+        }
+      },
+      "value": null,
+      "timestamp": 1756276514260
+    }
+  }
+}
