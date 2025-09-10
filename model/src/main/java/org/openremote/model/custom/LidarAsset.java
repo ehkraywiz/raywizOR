@@ -74,10 +74,12 @@ public class LidarAsset extends Asset<LidarAsset> {
     public static final AttributeDescriptor<Double> tilt        =           new AttributeDescriptor<>("Tilt",               ValueType.NUMBER,                   new MetaItem<>(MetaItemType.AGENT_LINK)).withUnits(UNITS_DEGREE);
 
     public static final AttributeDescriptor<ValueType.ObjectMap[]> alert =  new AttributeDescriptor<>("Varsler",            ValueType.JSON_OBJECT.asArray(),    new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
+    /*
     public static final AttributeDescriptor<String[]> alertSource =         new AttributeDescriptor<>("Varslende_Sensor",   ValueType.TEXT.asArray(),           new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
     public static final AttributeDescriptor<String[]> alertLevel =          new AttributeDescriptor<>("Alvorlighetsgrad",   ValueType.TEXT.asArray(),           new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
     public static final AttributeDescriptor<String[]> alertMessage =        new AttributeDescriptor<>("Varselsmelding",     ValueType.TEXT.asArray(),           new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
     public static final AttributeDescriptor<String[]> alertCode =           new AttributeDescriptor<>("Varselskode",        ValueType.TEXT.asArray(),           new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
+    */
 
     protected LidarAsset() {
     }
