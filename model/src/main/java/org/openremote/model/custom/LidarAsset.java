@@ -31,11 +31,7 @@ import org.openremote.model.value.*;
 
 import jakarta.persistence.Entity;
 
-import javax.json.JsonObject;
-import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Optional;
 
 import static org.openremote.model.Constants.*;
 import static org.openremote.model.Constants.UNITS_HOUR;
@@ -74,18 +70,9 @@ public class LidarAsset extends Asset<LidarAsset> {
     public static final AttributeDescriptor<Double> tilt        =               new AttributeDescriptor<>("Tilt",               ValueType.NUMBER,                   new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.AGENT_LINK)).withUnits(UNITS_DEGREE);
 
     public static final AttributeDescriptor<ValueType.ObjectMap[]> alert =      new AttributeDescriptor<>("Varsler",            ValueType.JSON_OBJECT.asArray(),    new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
-    public static final AttributeDescriptor<String> mostSevereAlarmSeverity=    new AttributeDescriptor<>("Varselsgrad",        ValueType.TEXT,                     new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
-    public static final AttributeDescriptor<String> mostSevereAlarmMessage=     new AttributeDescriptor<>("Feilmelding",        ValueType.TEXT,                     new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+    public static final AttributeDescriptor<String> mostSevereAlarmSeverity=    new AttributeDescriptor<>("ViktigsteVarselsgrad",        ValueType.TEXT,                     new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+    public static final AttributeDescriptor<String> mostSevereAlarmMessage=     new AttributeDescriptor<>("ViktigsteFeilmelding",        ValueType.TEXT,                     new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
 
-
-    /*
-    public static final AttributeDescriptor<ValueType.ObjectMap[]> alert =  new AttributeDescriptor<>("Varsler",            ValueType.JSON_OBJECT.asArray(),    new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
-    /*
-    public static final AttributeDescriptor<String[]> alertSource =         new AttributeDescriptor<>("Varslende_Sensor",   ValueType.TEXT.asArray(),           new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
-    public static final AttributeDescriptor<String[]> alertLevel =          new AttributeDescriptor<>("Alvorlighetsgrad",   ValueType.TEXT.asArray(),           new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
-    public static final AttributeDescriptor<String[]> alertMessage =        new AttributeDescriptor<>("Varselsmelding",     ValueType.TEXT.asArray(),           new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
-    public static final AttributeDescriptor<String[]> alertCode =           new AttributeDescriptor<>("Varselskode",        ValueType.TEXT.asArray(),           new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
-    */
 
     protected LidarAsset() {
     }

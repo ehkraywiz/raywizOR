@@ -14,7 +14,7 @@ public class TrafficDataAsset extends Asset<TrafficDataAsset> {
     public static final AssetDescriptor<TrafficDataAsset> trafficDataAssetAssetDescriptor = new AssetDescriptor<>("car-connected", "0098fa", TrafficDataAsset.class);
 
 
-    public static final AttributeDescriptor<String> leverandor = new AttributeDescriptor<>("Leverandør", ValueType.TEXT,    new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE));
+    public static final AttributeDescriptor<String> leverandor = new AttributeDescriptor<>("Leverandoer", ValueType.TEXT,    new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE));
     public static final AttributeDescriptor<String> type = new AttributeDescriptor<>("Sensortype", ValueType.TEXT,          new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE));
     public static final AttributeDescriptor<String> sensorID = new AttributeDescriptor<>("SensorID", ValueType.TEXT,        new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE));
     public static final AttributeDescriptor<Date> datetime = new AttributeDescriptor<>("Dato", ValueType.DATE_AND_TIME,     new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
@@ -25,10 +25,10 @@ public class TrafficDataAsset extends Asset<TrafficDataAsset> {
     public static final AttributeDescriptor<Double> velocity = new AttributeDescriptor<>("Hastighet", ValueType.NUMBER,     new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS)).withUnits(UNITS_KILO, UNITS_METRE, UNITS_HOUR);
     public static final AttributeDescriptor<Double> heading = new AttributeDescriptor<>("Retning", ValueType.NUMBER,        new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
     public static final AttributeDescriptor<Double> length = new AttributeDescriptor<>("Objektlengde", ValueType.NUMBER,    new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS)).withUnits(UNITS_METRE);
-    public static final AttributeDescriptor<Double> height = new AttributeDescriptor<>("Objekthøyde", ValueType.NUMBER,     new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS)).withUnits(UNITS_METRE);
+    public static final AttributeDescriptor<Double> height = new AttributeDescriptor<>("Objekthoeyde", ValueType.NUMBER,     new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS)).withUnits(UNITS_METRE);
     public static final AttributeDescriptor<Double> width = new AttributeDescriptor<>("Objektbredde", ValueType.NUMBER,     new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS)).withUnits(UNITS_METRE);
 
-    public static final AttributeDescriptor<Double> DENM = new AttributeDescriptor<>("DENMkode", ValueType.NUMBER,          new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+    public static final AttributeDescriptor<Double> DENM = new AttributeDescriptor<>("DenmKode", ValueType.NUMBER,          new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
     public static final AttributeDescriptor<String> msg = new AttributeDescriptor<>("Melding", ValueType.TEXT,              new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
 
     protected TrafficDataAsset() {

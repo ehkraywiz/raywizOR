@@ -32,7 +32,7 @@ export class AlarmWidget extends OrAssetWidget {
       displayIcon: "alarm-light",
       minColumnWidth: 2,
       minColumnHeight: 2,
-      getContentHtml(config: AlarmWidgetConfig): OrWidget {
+      getContentHtml(config: AlarmWidgetConfig): OrAssetWidget {
         return new AlarmWidget(config);
       },
       getSettingsHtml(config: AlarmWidgetConfig): WidgetSettings {
@@ -47,7 +47,7 @@ export class AlarmWidget extends OrAssetWidget {
   private alarms: SentAlarm[] = [];
 
   public async refreshContent(force: boolean) {
-    const mgr = getManager();
+    const mgr = Manager();
     this.alarms = await mgr.rest.api.AlarmResource.getSentAlarms();
     this.requestUpdate();
   }
