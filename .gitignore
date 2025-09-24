@@ -63,4 +63,10 @@ local.properties
 *.tar.gz
 /balena/manager-build/
 
+# Playwright
+test-results
+app-test-report
+component-test-report
+.auth
+
 /tools

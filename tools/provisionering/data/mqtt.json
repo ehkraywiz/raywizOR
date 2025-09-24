@@ -1,0 +1,36 @@
+{
+  "diagnostics": {
+    "datetime": "2025-08-27T08:39:48.000Z",
+    "lidar": {
+      "name": "EV6S153D1_m13035",
+      "model": "OS1",
+      "sid": "122527001553",
+      "lat": 68.108346,
+      "lon": 15.887700,
+      "mV": 23824,
+      "temp": 22,
+      "tilt": 0.162693852049661
+    },
+    "alerts": [
+      {
+        "source": "122527001553",
+        "level": "CRITICAL",
+        "msg": "No data from lidar",
+        "code": "UNKNOWN"
+      }
+    ]
+  }
+}
+
+{
+  "diagnostics": {
+    "datetime": "2025-08-27T11:31:56.000Z",
+    "hardware_id": "*1EUP6ZKQJUFHPP6",
+    "latitude": 68.823319000,
+    "longitude": 18.195837000,
+    "azimuth": 0.0,
+    "cpu_utilization": 36.8,
+    "available_memory": 1061765120,
+    "available_disk_space": 57613979648
+  }
+}
