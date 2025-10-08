@@ -67,3 +67,6 @@ test-results
 app-test-report
 component-test-report
 .auth
+
+
+tools\provisjonering\
