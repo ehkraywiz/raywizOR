@@ -9,7 +9,6 @@ bin-release/
 
 # Other files and folders
 deployment/manager/fcm.json
-deployment/
 .settings/
 .gradle/
 .vagrant/
@@ -70,4 +69,5 @@ app-test-report
 component-test-report
 .auth
 
-/tools
+
+/tools/provisionering/
