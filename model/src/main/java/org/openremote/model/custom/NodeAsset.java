@@ -28,4 +28,11 @@ public class NodeAsset extends Asset<NodeAsset> {
     public static final AttributeDescriptor<Integer> availableMemory = new AttributeDescriptor<>("TilgjengeligMinne", ValueType.POSITIVE_INTEGER, new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
     public static final AttributeDescriptor<Double> availableStorage = new AttributeDescriptor<>("TilgjengeligLagringsplass", ValueType.NUMBER, new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
 
+    public static final AttributeDescriptor<String> state = new AttributeDescriptor<>         ("Modus", ValueType.TEXT , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<String> topic = new AttributeDescriptor<>         ("RapporteringsTopic", ValueType.TEXT , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<Double> report_int = new AttributeDescriptor<>    ("RapporteringsIntervall", ValueType.NUMBER , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<Double> report_stop = new AttributeDescriptor<>   ("RapportStopp", ValueType.NUMBER , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<Boolean> report_speed = new AttributeDescriptor<> ("RapporterHastighet", ValueType.BOOLEAN , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<Boolean> report_dim = new AttributeDescriptor<>   ("RapporterDimensjoner", ValueType.BOOLEAN , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
+
 }

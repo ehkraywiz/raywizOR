@@ -16,7 +16,7 @@ public class TrafficDataAsset extends Asset<TrafficDataAsset> {
 
     public static final AttributeDescriptor<String> leverandor = new AttributeDescriptor<>("Leverandoer", ValueType.TEXT,   new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE));
     public static final AttributeDescriptor<String> type = new AttributeDescriptor<>("Sensortype", ValueType.TEXT,          new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE));
-    public static final AttributeDescriptor<String> sensorID = new AttributeDescriptor<>("SensorID", ValueType.TEXT,        new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE));
+    public static final AttributeDescriptor<String> sensorID = new AttributeDescriptor<>("SensorNavn", ValueType.TEXT,        new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE));
     public static final AttributeDescriptor<Date> datetime = new AttributeDescriptor<>("Dato", ValueType.DATE_AND_TIME,     new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
     public static final AttributeDescriptor<Integer> objectID = new AttributeDescriptor<>("ObjektID", ValueType.INTEGER,    new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
     public static final AttributeDescriptor<String> objectClass = new AttributeDescriptor<>("Objektklasse", ValueType.TEXT, new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));

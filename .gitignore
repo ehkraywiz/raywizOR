@@ -28,6 +28,7 @@ console/iOS/DerivedData
 console/iOS/Pods
 manager/.factorypath/
 Pods/
+certs/
 bower_components/
 node_modules/
 manager/src/main/resources/version.properties
