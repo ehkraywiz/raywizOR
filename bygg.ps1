@@ -4,7 +4,10 @@ docker compose down
 if ($LASTEXITCODE -eq 0)
 {
     docker build -t eirikraywiz/openremote:custom ./manager/build/install/manager
-    docker compose up -d
+    if ($LASTEXITCODE -eq 0)
+    {
+        docker compose up -d
+    }
 }
 
 

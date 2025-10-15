@@ -252,6 +252,26 @@
       },
       "value": null,
       "timestamp": 1756276514260
+    },
+    "ViktigsteFeilmelding": {
+      "name": "ViktigsteFeilmelding",
+      "type": "text",
+      "meta": {
+        "ruleState": true,
+        "storeDataPoints": true
+      },
+      "value": null,
+      "timestamp": 0
+    },
+    "ViktigsteVarselsgrad": {
+      "name": "ViktigsteVarselsgrad",
+      "type": "text",
+      "meta": {
+        "ruleState": true,
+        "storeDataPoints": true
+      },
+      "value": null,
+      "timestamp": 0
     }
   }
 }

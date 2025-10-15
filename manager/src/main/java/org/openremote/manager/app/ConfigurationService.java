@@ -89,6 +89,7 @@ public class ConfigurationService implements ContainerService {
                 .map(Path::toAbsolutePath)
                 .filter(Files::isRegularFile)
                 .findFirst().orElse(null);
+        LOG.severe("STREAM.OF found, "+ mapSettingsPath.toString());
 
         mapTilesPath = Stream.of(getString(container.getConfig(), OR_MAP_TILES_PATH, OR_MAP_TILES_PATH_DEFAULT), "/deployment/map/mapdata.mbtiles", "/opt/map/mapdata.mbtiles", OR_MAP_TILES_PATH_DEFAULT)
                 .map(Path::of)
@@ -134,6 +135,7 @@ public class ConfigurationService implements ContainerService {
         if (mapSettingsPath == null) {
             return null;
         }
+        LOG.severe(mapSettingsPath.toString());
         try {
             return (ObjectNode) ValueUtil.JSON.readTree(mapSettingsPath.toFile());
         } catch (IOException e) {

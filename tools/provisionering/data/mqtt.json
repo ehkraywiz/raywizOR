@@ -34,3 +34,29 @@
     "available_disk_space": 57613979648
   }
 }
+
+
+{
+  "vendor": "its perception",
+  "type": "Lidar",
+  "sensor": "EV6S171D1_m531",
+  "data": {
+    "datetime": "2025-09-24T13:08:06:282Z",
+    "object-id": 426215,
+    "object class": "VEHICLE",
+    "latitude": 68.823363,
+    "longitude": 18.196681,
+    "velocity": {
+      "value": 71.9,
+      "unit": "km/h",
+      "heading": 275.7
+    },
+    "dimensions": {
+      "length": 4.9,
+      "height": 1.7,
+      "width": 2.0
+    },
+    "DENM": 0.0,
+    "message": "Object velocity"
+  }
+}
