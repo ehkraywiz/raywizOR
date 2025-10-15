@@ -11,7 +11,7 @@ import static org.openremote.model.Constants.*;
 
 @Entity
 public class TrafficDataAsset extends Asset<TrafficDataAsset> {
-    public static final AssetDescriptor<TrafficDataAsset> trafficDataAssetAssetDescriptor = new AssetDescriptor<>("car-connected", "0098fa", TrafficDataAsset.class);
+    public static final AssetDescriptor<TrafficDataAsset> trafficDataAssetAssetDescriptor = new AssetDescriptor<>("car_connected", "0098fa", TrafficDataAsset.class);
 
 
     public static final AttributeDescriptor<String> leverandor = new AttributeDescriptor<>("Leverandoer", ValueType.TEXT,   new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE));
@@ -31,12 +31,12 @@ public class TrafficDataAsset extends Asset<TrafficDataAsset> {
     public static final AttributeDescriptor<Double> DENM = new AttributeDescriptor<>("DenmKode", ValueType.NUMBER,          new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
     public static final AttributeDescriptor<String> msg = new AttributeDescriptor<>("Melding", ValueType.TEXT,              new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
 
-    public static final AttributeDescriptor<Double> crossings = new AttributeDescriptor<>("Forbipasseringer", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
-    public static final AttributeDescriptor<Double> highSpeedCrossings = new AttributeDescriptor<>("HoyFart", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
-    public static final AttributeDescriptor<Double> lowSpeedCrossings = new AttributeDescriptor<>("LavFart", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
-    public static final AttributeDescriptor<Double> tallCrossings = new AttributeDescriptor<>("HoyBil", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
-    public static final AttributeDescriptor<Double> longCrossings = new AttributeDescriptor<>("LangBil", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
-    public static final AttributeDescriptor<Double> maxHeight = new AttributeDescriptor<>("MaksTillattHoeyde", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+    public static final AttributeDescriptor<Double> crossings = new AttributeDescriptor<>("Forbipasseringer_Teller", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+    public static final AttributeDescriptor<Double> highSpeedCrossings = new AttributeDescriptor<>("HoyFart_Teller", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+    public static final AttributeDescriptor<Double> lowSpeedCrossings = new AttributeDescriptor<>("LavFart_Teller", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+    public static final AttributeDescriptor<Double> tallCrossings = new AttributeDescriptor<>("HoyBil_Teller", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+    public static final AttributeDescriptor<Double> longCrossings = new AttributeDescriptor<>("LangBil_Teller", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+    public static final AttributeDescriptor<Double> maxHeight = new AttributeDescriptor<>("MaksTillattHoeyde_Teller", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
 
 
     public static final AttributeDescriptor<Double> stoppages = new AttributeDescriptor<>("AntallStopp", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
