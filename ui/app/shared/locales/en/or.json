@@ -769,6 +769,7 @@
     "access.private": "Only me",
     "interval.off": "Auto-refresh off",
     "interval.one_min": "1 min",
+    "interval.two_sec": "2 sec",
     "interval.five_min": "5 min",
     "interval.quarter": "15 min",
     "interval.one_hour": "1 hour",
