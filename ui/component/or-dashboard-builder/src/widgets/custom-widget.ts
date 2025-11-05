@@ -7,7 +7,17 @@ import {OrWidget, WidgetManifest} from "../util/or-widget";
 import {WidgetSettings} from "../util/widget-settings";
 import {GaugeSettings} from "../settings/gauge-settings";
 import {when} from "lit/directives/when.js";
-
+import {
+    AlarmAssetLink,
+    AlarmSeverity,
+    AlarmSource,
+    AlarmStatus,
+    Asset,
+    SentAlarm,
+    User,
+    UserQuery
+} from "@openremote/model";
+import manager, {DefaultColor3, DefaultColor4} from "@openremote/core";
 
 export interface CustomWidgetConfig extends AssetWidgetConfig {
     attributeRefs: AttributeRef[];
@@ -53,14 +63,37 @@ export class CustomWidget extends OrWidget {
     }
 
     protected render(): TemplateResult {
-        return html`
-            <span>Custom field one: </span>
-            <span>${this.widgetConfig.customFieldOne}</span>
-            <span>${this.widgetConfig.customFieldTwo}</span>
-        `;
+        let alarms =
+        return html`<h1>WIP</h1>`;
+        /*return html`
+        <!-- List of Alarms page -->
+        <div id="container">
+            ${disabled ? html`
+            <div id="msg">
+                <or-translate value="loading"/>
+            </div>
+            ` : html`
+            <div id="table-container">
+                ${when(this._data, () => guard([this._data], () => this.getAlarmsTable(writeAlarms)))}
+            </div>
+            `}
+        </div>
+
+
+        `;*/
     }
+/*
+    protected getAlarmsTable(writeAlarms: boolean) {
+        return html`
+            <or-alarms-table .alarms=${this._data} .readonly=${!writeAlarms}
+            ></or-alarms-table>
+        `;
+    }*/
 
 }
+
+
+
 
 // Settings element
 // This can be placed in a seperate file if preferred.
@@ -78,7 +111,7 @@ export class CustomSettings extends WidgetSettings {
     }
 
     protected onButtonClick() {
-        this.widgetConfig.customFieldOne = "custom text";
+        this.widgetConfig.customFieldOne = "BRAAAA";
         this.notifyConfigUpdate();
     }
 }

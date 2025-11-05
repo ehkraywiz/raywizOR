@@ -14,7 +14,10 @@ import { Manager } from "@openremote/core";
 import type { SentAlarm } from "@openremote/model";
 
 // ---------------- CONFIG ----------------
-export interface AlarmWidgetConfig extends WidgetConfig {}
+export interface AlarmWidgetConfig extends WidgetConfig {
+    please?: any;
+    work?: bool;
+    }
 
 function getDefaultWidgetConfig(): AlarmWidgetConfig {
   return {};
