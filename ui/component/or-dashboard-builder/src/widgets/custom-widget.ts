@@ -65,9 +65,8 @@ export class CustomWidget extends OrWidget {
     protected render(): TemplateResult {
         return html`
                     <h1>In development</h1>
-                    <pre>
-                        <or-alarms-table .alarms=""></or-alarms-table>
-                    </pre>`;
+                    </iframe src="192.168.1.200/manager/#/alarms">
+                    `;
     }
 /*
     protected getAlarmsTable(writeAlarms: boolean) {
