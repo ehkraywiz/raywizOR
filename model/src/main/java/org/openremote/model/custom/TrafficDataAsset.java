@@ -27,16 +27,14 @@ public class TrafficDataAsset extends Asset<TrafficDataAsset> {
     public static final AttributeDescriptor<Double> length = new AttributeDescriptor<>("Objektlengde", ValueType.NUMBER,    new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS)).withUnits(UNITS_METRE);
     public static final AttributeDescriptor<Double> height = new AttributeDescriptor<>("Objekthoeyde", ValueType.NUMBER,    new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS)).withUnits(UNITS_METRE);
     public static final AttributeDescriptor<Double> width = new AttributeDescriptor<>("Objektbredde", ValueType.NUMBER,     new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS)).withUnits(UNITS_METRE);
-
     public static final AttributeDescriptor<Double> DENM = new AttributeDescriptor<>("DenmKode", ValueType.NUMBER,          new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
     public static final AttributeDescriptor<String> msg = new AttributeDescriptor<>("Melding", ValueType.TEXT,              new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
-
     public static final AttributeDescriptor<Double> crossings = new AttributeDescriptor<>("Forbipasseringer_Teller", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
     public static final AttributeDescriptor<Double> highSpeedCrossings = new AttributeDescriptor<>("HoyFart_Teller", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
     public static final AttributeDescriptor<Double> lowSpeedCrossings = new AttributeDescriptor<>("LavFart_Teller", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
     public static final AttributeDescriptor<Double> tallCrossings = new AttributeDescriptor<>("HoyBil_Teller", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
     public static final AttributeDescriptor<Double> longCrossings = new AttributeDescriptor<>("LangBil_Teller", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
-    public static final AttributeDescriptor<Double> maxHeight = new AttributeDescriptor<>("MaksTillattHoeyde_Teller", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+    public static final AttributeDescriptor<Double> maxHeight = new AttributeDescriptor<>("MaksTillattHoeyde", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
 
 
     public static final AttributeDescriptor<Double> stoppages = new AttributeDescriptor<>("AntallStopp", ValueType.NUMBER, new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));

@@ -16,6 +16,11 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "composite": true,
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "baseUrl": ".",
+    "paths": {
+      "@manager/*": ["app/manager/src/*"],
+      "@dashboard/*": ["component/or-dashboard-builder/src/*"]
+    }
   }
 }

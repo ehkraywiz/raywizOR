@@ -63,24 +63,11 @@ export class CustomWidget extends OrWidget {
     }
 
     protected render(): TemplateResult {
-        let alarms =
-        return html`<h1>WIP</h1>`;
-        /*return html`
-        <!-- List of Alarms page -->
-        <div id="container">
-            ${disabled ? html`
-            <div id="msg">
-                <or-translate value="loading"/>
-            </div>
-            ` : html`
-            <div id="table-container">
-                ${when(this._data, () => guard([this._data], () => this.getAlarmsTable(writeAlarms)))}
-            </div>
-            `}
-        </div>
-
-
-        `;*/
+        return html`
+                    <h1>In development</h1>
+                    <pre>
+                        <or-alarms-table .alarms=""></or-alarms-table>
+                    </pre>`;
     }
 /*
     protected getAlarmsTable(writeAlarms: boolean) {

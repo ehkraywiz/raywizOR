@@ -19,20 +19,18 @@ import java.util.Optional;
 public class NodeAsset extends Asset<NodeAsset> {
     public static final AssetDescriptor<NodeAsset> nodeAssetAssetDescriptor = new AssetDescriptor<>("fax", "aa00aa", NodeAsset.class);
 
-    public static final AttributeDescriptor<Date>   dateTime    = new AttributeDescriptor<>("Dato", ValueType.DATE_AND_TIME, new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE));
-    public static final AttributeDescriptor<String> hardwareID = new AttributeDescriptor<>("MaskinvareID", ValueType.TEXT);
-    public static final AttributeDescriptor<Double> latitude = new AttributeDescriptor<>("Breddegrad", ValueType.NUMBER);
-    public static final AttributeDescriptor<Double> longitude = new AttributeDescriptor<>("Lengdegrad", ValueType.NUMBER);
-    public static final AttributeDescriptor<Double> azimuth = new AttributeDescriptor<>("Azimut",ValueType.NUMBER);
-    public static final AttributeDescriptor<Double> cpuUtilization = new AttributeDescriptor<>("CPUBelastning", ValueType.NUMBER, new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
-    public static final AttributeDescriptor<Double> availableMemory = new AttributeDescriptor<>("TilgjengeligMinne", ValueType.NUMBER, new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
-    public static final AttributeDescriptor<Double> availableStorage = new AttributeDescriptor<>("TilgjengeligLagringsplass", ValueType.NUMBER, new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
-
-    public static final AttributeDescriptor<String> state = new AttributeDescriptor<>         ("Modus", ValueType.TEXT , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
-    public static final AttributeDescriptor<String> topic = new AttributeDescriptor<>         ("RapporteringsTopic", ValueType.TEXT , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
-    public static final AttributeDescriptor<Double> report_int = new AttributeDescriptor<>    ("RapporteringsIntervall", ValueType.NUMBER , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
-    public static final AttributeDescriptor<Double> report_stop = new AttributeDescriptor<>   ("RapportStopp", ValueType.NUMBER , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
-    public static final AttributeDescriptor<Boolean> report_speed = new AttributeDescriptor<> ("RapporterHastighet", ValueType.BOOLEAN , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
-    public static final AttributeDescriptor<Boolean> report_dim = new AttributeDescriptor<>   ("RapporterDimensjoner", ValueType.BOOLEAN , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
-
+    public static final AttributeDescriptor<Date>   dateTime    = new AttributeDescriptor<>         ("Dato", ValueType.DATE_AND_TIME, new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE));
+    public static final AttributeDescriptor<String> hardwareID = new AttributeDescriptor<>          ("MaskinvareID", ValueType.TEXT);
+    public static final AttributeDescriptor<Double> latitude = new AttributeDescriptor<>            ("Breddegrad", ValueType.NUMBER);
+    public static final AttributeDescriptor<Double> longitude = new AttributeDescriptor<>           ("Lengdegrad", ValueType.NUMBER);
+    public static final AttributeDescriptor<Double> azimuth = new AttributeDescriptor<>             ("Azimut",ValueType.NUMBER);
+    public static final AttributeDescriptor<Double> cpuUtilization = new AttributeDescriptor<>      ("CPUBelastning", ValueType.NUMBER, new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+    public static final AttributeDescriptor<Double> availableMemory = new AttributeDescriptor<>     ("TilgjengeligMinne", ValueType.NUMBER, new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+    public static final AttributeDescriptor<Double> availableStorage = new AttributeDescriptor<>    ("TilgjengeligLagringsplass", ValueType.NUMBER, new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+    public static final AttributeDescriptor<String> state = new AttributeDescriptor<>               ("Modus", ValueType.TEXT , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<String> topic = new AttributeDescriptor<>               ("RapporteringsTopic", ValueType.TEXT , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<Double> report_int = new AttributeDescriptor<>          ("RapporteringsIntervall", ValueType.NUMBER , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<Double> report_stop = new AttributeDescriptor<>         ("RapportStopp", ValueType.NUMBER , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<Boolean> report_speed = new AttributeDescriptor<>       ("RapporterHastighet", ValueType.BOOLEAN , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<Boolean> report_dim = new AttributeDescriptor<>         ("RapporterDimensjoner", ValueType.BOOLEAN , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
 }
