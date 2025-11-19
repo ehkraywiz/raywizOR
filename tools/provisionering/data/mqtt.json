@@ -1,22 +1,23 @@
+// system/sensors/+   | for lidar
 {
   "diagnostics": {
-    "datetime": "2025-08-27T08:39:48.000Z",
+    "datetime": "2025-11-19T08:36:21.000Z",
     "lidar": {
-      "name": "EV6S153D1_m13035",
+      "name": "EV6S171D1_m531",
       "model": "OS1",
-      "sid": "122527001553",
-      "lat": 68.108346,
-      "lon": 15.887700,
-      "mV": 23824,
-      "temp": 22,
-      "tilt": 0.162693852049661
+      "sid": "122427001192",
+      "lat": 68.823319,
+      "lon": 18.195837,
+      "mV": 24075,
+      "temp": 4,
+      "tilt": 0.054006122339359
     },
     "alerts": [
       {
-        "source": "122527001553",
-        "level": "CRITICAL",
-        "msg": "No data from lidar",
-        "code": "UNKNOWN"
+        "source": "122427001192",
+        "level": "WARNING",
+        "msg": "Dropping lidar data",
+        "code": "0x02000002"
       }
     ]
   }

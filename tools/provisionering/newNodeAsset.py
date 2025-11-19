@@ -1,4 +1,4 @@
-with open("nodeAssetTemplate.json", "r") as templateFile:
+with open("./template/nodeAssetTemplate.json", "r") as templateFile:
     templateContent = templateFile.read()
     MQTTAGENTID = "4A2BAZMqOrtGhYOk3pj4Sm" #input("Enter the MQTT Agent ID: ")
     SENSORTOPIC = input("Enter the Node topic ID: ")

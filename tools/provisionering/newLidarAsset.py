@@ -1,4 +1,4 @@
-with open("lidarAssetTemplate.json", "r") as templateFile:
+with open("./template/lidarAssetTemplate.json", "r") as templateFile:
     templateContent = templateFile.read()
     MQTTAGENTID = input("Enter the MQTT Agent ID: ")
     SENSORTOPIC = input("Enter the SensorID: ")

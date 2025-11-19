@@ -11,7 +11,7 @@ import static org.openremote.model.Constants.*;
 
 @Entity
 public class TrafficDataAsset extends Asset<TrafficDataAsset> {
-    public static final AssetDescriptor<TrafficDataAsset> trafficDataAssetAssetDescriptor = new AssetDescriptor<>("car_connected", "0098fa", TrafficDataAsset.class);
+    public static final AssetDescriptor<TrafficDataAsset> trafficDataAssetAssetDescriptor = new AssetDescriptor<>("cloud-print-outline", "0098fa", TrafficDataAsset.class);
 
 
     public static final AttributeDescriptor<String> leverandor = new AttributeDescriptor<>("Leverandoer", ValueType.TEXT,   new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.RULE_STATE));

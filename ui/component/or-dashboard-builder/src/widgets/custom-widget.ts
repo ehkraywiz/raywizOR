@@ -65,7 +65,7 @@ export class CustomWidget extends OrWidget {
     protected render(): TemplateResult {
         return html`
                     <h1>In development</h1>
-                    </iframe src="192.168.1.200/manager/#/alarms">
+                    <iframe src="192.168.1.200/manager/#/alarms></iframe">
                     `;
     }
 /*

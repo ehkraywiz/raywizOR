@@ -7,7 +7,7 @@ export function headerItemMap<S extends AppStateKeyed, A extends AnyAction>(orAp
     return {
         icon: "map",
         href: getMapRoute(),
-        text: "Kart"
+        text: "map"
     };
 }
 
@@ -15,7 +15,7 @@ export function headerItemAssets<S extends AppStateKeyed, A extends AnyAction>(o
     return {
         icon: "rhombus-split",
         href: "assets",
-        text: "Enheter",
+        text: "assets",
     };
 }
 
@@ -32,7 +32,7 @@ export function headerItemRules<S extends AppStateKeyed, A extends AnyAction>(or
     return {
         icon: "state-machine",
         href: "rules",
-        text: "Automasjon",
+        text: "rules",
         hideMobile: true,
         roles: () => !manager.isRestrictedUser()
     };
@@ -42,7 +42,7 @@ export function headerItemInsights<S extends AppStateKeyed, A extends AnyAction>
     return {
         icon: "chart-areaspline",
         href: "insights",
-        text: "Oversikt"
+        text: "insights"
     };
 }
 
@@ -70,7 +70,7 @@ export function headerItemLanguage<S extends AppStateKeyed, A extends AnyAction>
     return {
         icon: "web",
         value: "language",
-        text: "språk",
+        text: "language",
         action: () => {
             orApp.showLanguageModal();
         }
