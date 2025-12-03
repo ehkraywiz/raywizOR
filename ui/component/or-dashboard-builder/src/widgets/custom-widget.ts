@@ -74,10 +74,11 @@ export class CustomWidget extends OrWidget {
     }
 
     protected render(): TemplateResult {
+        const response = manager.rest.api.AlarmResource.getAlarms({realm: manager.displayRealm});
 
         return html`
                     <h1>In development 2</h1>
-                    ${SentAlarm..forEach((alarmy: any) => {alert(alarmy.title)})}
+
                     `;
     }
 /*

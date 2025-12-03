@@ -118,11 +118,10 @@ services:
       REALM: ${RAW_REALM:-vegvesen}
       CLIENT_ID: ${RAW_CLIENT_ID:-}
       CLIENT_SECRET: ${RAW_CLIENT_SECRET:-}
-    image: eirikraywiz/raywiz-service:prod
-    container_name: RayAdWizor-Service
+    image: eirikraywiz/raywiz-service:dev
+    container_name: rayadwizor
     depends_on:
       manager:
         condition: service_healthy
-    ports:
-      - "80:80"
-
+    expose:
+      - "5554"
