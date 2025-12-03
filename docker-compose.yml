@@ -104,3 +104,25 @@ services:
       - "9876:9876"
     volumes:
       - ./mbtiles:/tilesets
+
+
+  rayadwizor:
+    environment:
+      OPENREMOTE_BASE_URL: ${OR_HOSTNAME:-localhost}
+      REG_PATH: ${RAW_REGPATH:-/api/vegvesen/service/}
+      HEARTBEAT_INTERVAL: ${RAW_INTERVAL:-30}
+      SERVICE_ID: ${RAW_SERVICE_ID:-rayadwizor}
+      OPENREMOTE_VERIFY: ${RAW_VERIFYSSL:-false}
+      LISTENADDRESS: ${RAW_LISTENADDRESS:-0.0.0.0}
+      PORT: ${RAW_PORT:-80}
+      REALM: ${RAW_REALM:-vegvesen}
+      CLIENT_ID: ${RAW_CLIENT_ID:-}
+      CLIENT_SECRET: ${RAW_CLIENT_SECRET:-}
+    image: eirikraywiz/raywiz-service:prod
+    container_name: RayAdWizor-Service
+    depends_on:
+      manager:
+        condition: service_healthy
+    ports:
+      - "80:80"
+

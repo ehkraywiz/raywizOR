@@ -25,6 +25,13 @@ export interface CustomWidgetConfig extends AssetWidgetConfig {
     customFieldTwo: number;
 }
 
+interface AlarmModel extends SentAlarm {
+    loaded?: boolean;
+    loading?: boolean;
+    alarmAssetLinks?: AlarmAssetLink[];
+    previousAssetLinks?: AlarmAssetLink[];
+}
+
 function getDefaultWidgetConfig(): CustomWidgetConfig {
     return {
         attributeRefs: [],
@@ -39,6 +46,10 @@ export class CustomWidget extends OrWidget {
     // Override of widgetConfig with extended type
     protected readonly widgetConfig!: CustomWidgetConfig;
 
+    @state()
+    protected _alarms: AlarmModel[] = [];
+    @state()
+    public alarm?: AlarmModel;
     static getManifest(): WidgetManifest {
         return {
             displayName: "Alarm Widget", // name to display in widget browser
@@ -63,9 +74,10 @@ export class CustomWidget extends OrWidget {
     }
 
     protected render(): TemplateResult {
+
         return html`
-                    <h1>In development</h1>
-                    <iframe src="192.168.1.200/manager/#/alarms></iframe">
+                    <h1>In development 2</h1>
+                    ${SentAlarm..forEach((alarmy: any) => {alert(alarmy.title)})}
                     `;
     }
 /*
