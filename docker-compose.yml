@@ -118,6 +118,7 @@ services:
       REALM: ${RAW_REALM:-vegvesen}
       CLIENT_ID: ${RAW_CLIENT_ID:-}
       CLIENT_SECRET: ${RAW_CLIENT_SECRET:-}
+      FLASK_DEBUG: ${RAW_DEBUG:-0}
     image: eirikraywiz/raywiz-service:dev
     container_name: rayadwizor
     depends_on:
