@@ -397,6 +397,7 @@ public class EmailNotificationHandler implements NotificationHandler {
         if (!mailTransport.isConnected()) {
             mailTransport.connect();
         }
+        LOG.info("Emailing[0] to: " + email.getAllRecipients()[0].toString());
         mailTransport.sendMessage(email, email.getAllRecipients());
     }
 
