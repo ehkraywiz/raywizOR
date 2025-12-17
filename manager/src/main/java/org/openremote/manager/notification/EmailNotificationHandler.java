@@ -45,7 +45,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import static org.openremote.container.util.MapAccess.*;
+import static org.openremote.model.util.MapAccess.*;
 import static org.openremote.model.Constants.*;
 import static org.openremote.model.security.User.EMAIL_NOTIFICATIONS_DISABLED_ATTRIBUTE;
 
@@ -397,6 +397,7 @@ public class EmailNotificationHandler implements NotificationHandler {
         if (!mailTransport.isConnected()) {
             mailTransport.connect();
         }
+        LOG.info("Emailing[0] to: " + email.getAllRecipients()[0].toString());
         mailTransport.sendMessage(email, email.getAllRecipients());
     }
 
