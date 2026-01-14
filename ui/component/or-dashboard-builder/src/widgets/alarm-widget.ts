@@ -1,23 +1,28 @@
-import { html, TemplateResult } from "lit";
+import { html, TemplateResult, PropertyValues } from "lit";
 import { customElement } from "lit/decorators.js";
 import {OrAssetWidget} from "../util/or-asset-widget";
 import {WidgetManifest} from "../util/or-widget";
 import {WidgetConfig} from "../util/widget-config";
 import {WidgetSettings} from "../util/widget-settings";
-import {TableSettings} from "../settings/table-settings";
 import "@openremote/or-mwc-components/or-mwc-table";
-import {OrMwcTableRowClickEvent, TableColumn, TableRow, TableConfig} from "@openremote/or-mwc-components/or-mwc-table";
+import {TableColumn, TableRow} from "@openremote/or-mwc-components/or-mwc-table";
 import { i18next } from "@openremote/or-translate";
-import {Util} from "@openremote/core";
-import {Asset, AssetModelUtil} from "@openremote/model";
-import { Manager } from "@openremote/core";
+import manager from "@openremote/core";
 import type { SentAlarm } from "@openremote/model";
+import {
+    AlarmAssetLink
+} from "@openremote/model";
 
 // ---------------- CONFIG ----------------
 export interface AlarmWidgetConfig extends WidgetConfig {
-    please?: any;
-    work?: bool;
+
     }
+interface AlarmModel extends SentAlarm {
+    loaded?: boolean;
+    loading?: boolean;
+    alarmAssetLinks?: AlarmAssetLink[];
+    previousAssetLinks?: AlarmAssetLink[];
+}
 
 function getDefaultWidgetConfig(): AlarmWidgetConfig {
   return {};
@@ -47,28 +52,33 @@ export class AlarmWidget extends OrAssetWidget {
     };
   }
 
-  private alarms: SentAlarm[] = [];
+  protected willUpdate(changedProps: PropertyValues) {
+    this.refreshContent(false)
+  }
+
+  private alarms: AlarmModel[] = [];
 
   public async refreshContent(force: boolean) {
-    const mgr = Manager();
-    this.alarms = await mgr.rest.api.AlarmResource.getSentAlarms();
+    const mgr = manager;
+    const realm = mgr.getRealm();
+    const response = await mgr.rest.api.AlarmResource.getAlarms({realm}, undefined, );
+    this.alarms = response.data as AlarmModel[];
     this.requestUpdate();
   }
 
   protected render(): TemplateResult {
     const columns: TableColumn[] = [
-      { title: i18next.t("id"), isSortable: true },
       { title: i18next.t("createdOn"), isSortable: true },
       { title: i18next.t("severity"), isSortable: true },
-      { title: i18next.t("message"), isSortable: false },
+      { title: i18next.t("title"), isSortable: true },
+      { title: i18next.t("content"), isSortable: false }
     ];
-
     const rows: TableRow[] = this.alarms.map(a => ({
       content: [
-        a.id ?? "",
         a.createdOn ? new Date(a.createdOn) : "",
         a.severity ?? "",
-        a.message ?? ""
+        a.title ?? "",
+        a.content ?? ""
       ]
     }));
 
