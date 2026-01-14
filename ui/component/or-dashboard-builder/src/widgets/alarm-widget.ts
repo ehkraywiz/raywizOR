@@ -1,4 +1,4 @@
-import {html, PropertyValues, TemplateResult} from "lit";
+import {css, html, PropertyValues, TemplateResult} from "lit";
 import {customElement} from "lit/decorators.js";
 import {OrAssetWidget} from "../util/or-asset-widget";
 import {WidgetManifest} from "../util/or-widget";
@@ -25,11 +25,26 @@ function getDefaultWidgetConfig(): AlarmWidgetConfig {
   return {};
 }
 
+//TODO: Fiks overflow
+const styling = css`
+    #widget-container {
+      height: 100%;
+      overflow: hidden;
+    }
+`
+
+
+//TODO: Flytt settings fra bånn av widget inn i settings fane & fiks overflow
 // ---------------- WIDGET ----------------
 @customElement("alarm-widget")
 export class AlarmWidget extends OrAssetWidget {
 
   protected readonly widgetConfig!: AlarmWidgetConfig;
+
+    static get styles() {
+        return [...super.styles, styling];
+    }
+
 
   static getManifest(): WidgetManifest {
     return {
