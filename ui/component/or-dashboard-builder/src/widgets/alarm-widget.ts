@@ -1,17 +1,14 @@
-import { html, TemplateResult, PropertyValues } from "lit";
-import { customElement } from "lit/decorators.js";
+import {html, PropertyValues, TemplateResult} from "lit";
+import {customElement} from "lit/decorators.js";
 import {OrAssetWidget} from "../util/or-asset-widget";
 import {WidgetManifest} from "../util/or-widget";
 import {WidgetConfig} from "../util/widget-config";
 import {WidgetSettings} from "../util/widget-settings";
 import "@openremote/or-mwc-components/or-mwc-table";
 import {TableColumn, TableRow} from "@openremote/or-mwc-components/or-mwc-table";
-import { i18next } from "@openremote/or-translate";
+import {i18next} from "@openremote/or-translate";
 import manager from "@openremote/core";
-import type { SentAlarm } from "@openremote/model";
-import {
-    AlarmAssetLink
-} from "@openremote/model";
+import {Alarm, AlarmAssetLink, AlarmStatus, SentAlarm} from "@openremote/model";
 
 // ---------------- CONFIG ----------------
 export interface AlarmWidgetConfig extends WidgetConfig {
@@ -60,9 +57,27 @@ export class AlarmWidget extends OrAssetWidget {
 
   public async refreshContent(force: boolean) {
     const mgr = manager;
-    const realm = mgr.getRealm();
+    const realm = mgr.displayRealm;
     const response = await mgr.rest.api.AlarmResource.getAlarms({realm}, undefined, );
-    this.alarms = response.data as AlarmModel[];
+    const tempAlarms = response.data as AlarmModel[];
+    const alarmList:AlarmModel[] = []
+    for(const alarm of tempAlarms) {
+        switch (alarm.status) {
+            case AlarmStatus.OPEN:
+                alarmList.push(alarm);
+                break;
+            case AlarmStatus.IN_PROGRESS:
+                alarmList.push(alarm);
+                break;
+            case AlarmStatus.ACKNOWLEDGED:
+                alarmList.push(alarm);
+                break;
+            default:
+                break;
+        }
+    }
+    this.alarms = alarmList;
+
     this.requestUpdate();
   }
 
@@ -74,9 +89,11 @@ export class AlarmWidget extends OrAssetWidget {
       { title: i18next.t("content"), isSortable: false }
     ];
     const rows: TableRow[] = this.alarms.map(a => ({
+
       content: [
         a.createdOn ? new Date(a.createdOn) : "",
         a.severity ?? "",
+        a.status ?? "",
         a.title ?? "",
         a.content ?? ""
       ]
