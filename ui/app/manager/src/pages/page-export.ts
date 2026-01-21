@@ -242,7 +242,7 @@ export class PageExport extends Page<AppStateKeyed> {
                 </div>
                 <div class="panel">
                     <p class="panel-title">${i18next.t("dataSelection")}</p>
-                    <div class="mdc-data-table" style="width: 100%; max-height: 500px; overflow-y: auto;margin-bottom: 2em">
+                    <div class="mdc-data-table" style="width: 100%; overflow-y: auto;margin-bottom: 2em">
                         <table class="mdc-data-table__table" aria-label="attribute list" >
                             <thead>
                             <tr class="mdc-data-table__header-row">

@@ -28,7 +28,7 @@ function getDefaultWidgetConfig(): StatuslightWidgetConfig {
 }
 
 
-@customElement("kpi-widget")
+@customElement("statuslight-widget")
 export class StatuslightWidget extends OrAssetWidget {
 
     protected widgetConfig!: StatuslightWidgetConfig;

@@ -43,7 +43,7 @@ services:
     extends:
       file: deploy.yml
       service: manager
-    image: openremote/manager:${MANAGER_VERSION:-develop}
+    image: eirikraywiz/openremote:custom
     build:
       context: ../manager/build/install/manager/
       dockerfile: Dockerfile

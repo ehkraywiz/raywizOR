@@ -23,7 +23,6 @@ import {DashboardKeyEmitter} from "./or-dashboard-keyhandler";
 import {OrDashboardPreview} from "./or-dashboard-preview";
 import {WidgetManifest} from "./util/or-widget";
 import {ChartWidget} from "./widgets/chart-widget";
-import {CustomWidget} from "./widgets/custom-widget"
 import {GaugeWidget} from "./widgets/gauge-widget";
 import {IntervalSelectEvent, intervalToMillis} from "./controls/dashboard-refresh-controls";
 import {ImageWidget} from "./widgets/image-widget";
@@ -34,6 +33,7 @@ import {TableWidget} from "./widgets/table-widget";
 import {GatewayWidget} from "./widgets/gateway-widget";
 import {BarChartWidget} from "./widgets/barchart-widget";
 import {AlarmWidget} from "./widgets/alarm-widget";
+import {StatuslightWidget} from "./widgets/statuslight-widget";
 
 // language=CSS
 const styling = css`
@@ -214,7 +214,6 @@ export const widgetTypes: Map<string, WidgetManifest> = new Map<string, WidgetMa
 
 export function registerWidgetTypes() {
     //widgetTypes.set("alarm", AlarmWidget.getManifest());
-    widgetTypes.set("custom", CustomWidget.getManifest());
     widgetTypes.set("linechart", ChartWidget.getManifest());
     widgetTypes.set("gauge", GaugeWidget.getManifest());
     widgetTypes.set("image", ImageWidget.getManifest());
@@ -225,6 +224,7 @@ export function registerWidgetTypes() {
     widgetTypes.set("gateway", GatewayWidget.getManifest());
     widgetTypes.set("barchart", BarChartWidget.getManifest());
     widgetTypes.set("alarm", AlarmWidget.getManifest());
+    widgetTypes.set("statuslight", StatuslightWidget.getManifest())
 }
 
 @customElement("or-dashboard-builder")

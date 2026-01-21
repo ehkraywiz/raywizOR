@@ -26,14 +26,12 @@ const style = css`
 
     .mdc-data-table {
         width: 100%;
-        overflow: auto;
-        max-height: 500px;
     }
 
     .mdc-data-table__paginated {
         overflow: hidden;
-        max-height: 700px;
         justify-content: space-between;
+        flex: 0 0 auto;
     }
     
     .mdc-data-table__fullheight {
