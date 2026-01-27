@@ -1,7 +1,7 @@
 {
   "realms": {
     "default": {
-      "appTitle": "OpenRemote Manager Demo",
+      "appTitle": "OpenRemote",
       "language": "en"
     },
     "smartcity": {

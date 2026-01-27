@@ -1,14 +1,15 @@
-import { customElement, state } from "lit/decorators.js";
-import { when } from "lit/directives/when.js";
+import {customElement, state} from "lit/decorators.js";
 import {OrAssetWidget} from "../util/or-asset-widget";
 import {OrWidget, WidgetManifest} from "../util/or-widget";
 import {WidgetSettings} from "../util/widget-settings";
 import {AssetWidgetConfig} from "../util/widget-config";
-import {Attribute, AttributeRef} from "@openremote/model";
-import {html, TemplateResult } from "lit";
+import {AlarmAssetLink, AlarmSeverity, AlarmStatus, SentAlarm} from "@openremote/model";
+import {css, html, TemplateResult} from "lit";
 import "@openremote/or-attribute-card";
+// @ts-ignore
 import {i18next} from "@openremote/or-translate";
 import {AlarmWidgetConfig} from "@dashboard/widgets/alarm-widget";
+import manager from "@openremote/core";
 
 export interface StatuslightWidgetConfig extends AssetWidgetConfig {
     period?: 'year' | 'month' | 'week' | 'day' | 'hour';
@@ -26,10 +27,69 @@ function getDefaultWidgetConfig(): StatuslightWidgetConfig {
         showTimestampControls: false
     };
 }
+interface AlarmModel extends SentAlarm {
+    loaded?: boolean;
+    loading?: boolean;
+    alarmAssetLinks?: AlarmAssetLink[];
+    previousAssetLinks?: AlarmAssetLink[];
+}
+
+
+const styling = css`
+    #widget-container {
+        flex: 1;
+        justify-content: center;
+    }
+    .lightwrapper {
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        gap: 0.75rem;
+        height: 100%;
+        width: 100%;
+        place-items: center;
+    }
+    
+    .light {
+        height: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        background-clip: padding-box;
+        display: grid;
+        place-items: center;
+    }
+    #critical {
+        background-color: red;
+        border: black solid 6px;
+    }
+    #warning {
+        background-color: darkorange;
+        border: black solid 6px;
+    }
+    #okidoki {
+        background-color: #0f0;
+        border: black solid 6px;
+    }
+    .inactive {
+        filter: grayscale(0.9);
+        border: transparent !important;
+    }
+`
+
+enum Statuslight {
+    OK,
+    ERROR,
+    CRITICAL
+}
 
 
 @customElement("statuslight-widget")
 export class StatuslightWidget extends OrAssetWidget {
+
+
+    static get styles() {
+        return [...super.styles, styling];
+    }
+
 
     protected widgetConfig!: StatuslightWidgetConfig;
 
@@ -39,9 +99,9 @@ export class StatuslightWidget extends OrAssetWidget {
     static getManifest(): WidgetManifest {
         return {
             displayName: "Statuslight",
-            displayIcon: "label",
+            displayIcon: "traffic-light",
             minColumnWidth: 1,
-            minColumnHeight: 1,
+            minColumnHeight: 2,
             getContentHtml(config: StatuslightWidgetConfig): OrWidget {
                 return new StatuslightWidget(config);
             },
@@ -54,68 +114,67 @@ export class StatuslightWidget extends OrAssetWidget {
         }
     }
 
-    refreshContent(force: boolean): void {
-        this.loadAssets(this.widgetConfig.attributeRefs);
+
+
+
+    @state()
+    private alarms: AlarmModel[] = [];
+
+    @state()
+    private lightStatus = Statuslight.OK;
+
+    public async refreshContent(force: boolean) {
+        const mgr = manager;
+        const realm = mgr.displayRealm;
+        const response = await mgr.rest.api.AlarmResource.getAlarms({realm}, undefined, );
+        const tempAlarms = response.data as AlarmModel[];
+        this.lightStatus = this.solveStatus(tempAlarms);
     }
 
-    protected willUpdate(changedProps: Map<string, any>) {
+    private solveStatus(alarmList: AlarmModel[]) {
 
-        // If widgetConfig, and the attributeRefs of them have changed...
-        if(changedProps.has("widgetConfig") && this.widgetConfig) {
-            const attributeRefs = this.widgetConfig.attributeRefs;
+        const openAlarms = alarmList.filter(alarm => alarm.status == AlarmStatus.OPEN && alarm.severity != AlarmSeverity.LOW);
+        const inProgressAlarms = alarmList.filter(alarm => alarm.status == AlarmStatus.IN_PROGRESS);
 
-            // Check if list of attributes has changed, based on the cached assets
-            const loadedRefs: AttributeRef[] = attributeRefs?.filter((attrRef: AttributeRef) => this.isAttributeRefLoaded(attrRef));
-            if (loadedRefs?.length !== (attributeRefs ? attributeRefs.length : 0)) {
-
-                // Fetch the new list of assets
-                this.loadAssets(attributeRefs);
-
-            }
-        }
-        return super.willUpdate(changedProps);
+        if(openAlarms.filter(a => a.severity == AlarmSeverity.HIGH).length > 0) return Statuslight.CRITICAL;
+        if(openAlarms.filter(a => a.severity == AlarmSeverity.MEDIUM).length > 0) return Statuslight.ERROR;
+        if(inProgressAlarms.filter(a => a.severity == AlarmSeverity.HIGH).length > 0) return Statuslight.ERROR;
+        return Statuslight.OK;
     }
 
-    protected loadAssets(attributeRefs: AttributeRef[]) {
-        if(attributeRefs.length === 0) {
-            this._error = "noAttributesConnected";
-            return;
+
+
+    connectedCallback() {
+        super.connectedCallback();
+        this.loadAlarms(true);
+    }
+
+
+    private loading = false;
+    private async loadAlarms(force: boolean) {
+        if (this.loading && !force) return;
+        this.loading = true;
+
+        try {
+            const mgr = manager;
+            const realm = mgr.displayRealm;
+
+            const response = await mgr.rest.api.AlarmResource.getAlarms({ realm });
+            const tempAlarms = response.data as AlarmModel[];
+            this.lightStatus = this.solveStatus(tempAlarms);
+
+        } finally {
+            this.loading = false;
         }
-        this._loading = true;
-        this._error = undefined;
-        this.fetchAssets(attributeRefs).then((assets) => {
-            this.loadedAssets = assets;
-            this.assetAttributes = attributeRefs?.map((attrRef: AttributeRef) => {
-                const assetIndex = assets.findIndex((asset) => asset.id === attrRef.id);
-                const foundAsset = assetIndex >= 0 ? assets[assetIndex] : undefined;
-                return foundAsset && foundAsset.attributes ? [assetIndex, foundAsset.attributes[attrRef.name!]] : undefined;
-            }).filter((indexAndAttr: any) => !!indexAndAttr) as [number, Attribute<any>][];
-        }).catch(e => {
-            this._error = e.message;
-        }).finally(() => {
-            this._loading = false;
-        });
+
     }
 
     protected render(): TemplateResult {
         return html`
-            <div style="position: relative; height: 100%; overflow: hidden;">
-                ${when(this._loading || this._error, () => {
-            // Have to use `position: absolute` with white background due to rendering inconsistencies in or-attribute-card
-            return html`
-                        <div style="position: absolute; top: -5%; width: 100%; height: 105%; background: white; z-index: 1; display: flex; justify-content: center; align-items: center; text-align: center;">
-                            ${when(this._loading, () => html`
-                                <or-loading-indicator></or-loading-indicator>
-                            `, () => html`
-                                <or-translate .value="${this._error}"></or-translate>
-                            `)}
-                        </div>
-                    `;
-        })}
-                <or-attribute-card .assets="${this.loadedAssets}" .assetAttributes="${this.assetAttributes}" .period="${this.widgetConfig.period}"
-                                   .deltaFormat="${this.widgetConfig.deltaFormat}" .mainValueDecimals="${this.widgetConfig.decimals}"
-                                   showControls="${this.widgetConfig?.showTimestampControls}" showTitle="${false}" hideAttributePicker="${true}" style="height: 100%;">
-                </or-attribute-card>
+            <div class="lightwrapper">
+                <div class="light ${this.lightStatus !== Statuslight.CRITICAL ? 'inactive' : ''}" id="critical">Active <br> Alarm</div>
+                <div class="light ${this.lightStatus !== Statuslight.ERROR ? 'inactive' : ''}" id="warning">Warning</div>
+                <div class="light ${this.lightStatus !== Statuslight.OK ? 'inactive' : ''}" id="okidoki">OK</div>
             </div>
         `;
     }

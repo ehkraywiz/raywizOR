@@ -1,20 +1,20 @@
-import {css, html, PropertyValues, TemplateResult} from "lit";
-import {customElement} from "lit/decorators.js";
+import {css, html, TemplateResult} from "lit";
+import {customElement, state} from "lit/decorators.js";
 import {OrAssetWidget} from "../util/or-asset-widget";
 import {WidgetManifest} from "../util/or-widget";
 import {WidgetConfig} from "../util/widget-config";
 import {WidgetSettings} from "../util/widget-settings";
 import "@openremote/or-mwc-components/or-mwc-table";
+// @ts-ignore
 import {OrMwcTableRowClickEvent, TableColumn, TableConfig, TableRow} from "@openremote/or-mwc-components/or-mwc-table";
 import {i18next} from "@openremote/or-translate";
 import manager from "@openremote/core";
-import {Alarm, AlarmAssetLink, AlarmStatus, SentAlarm} from "@openremote/model";
-import { state } from "lit/decorators.js";
+import {AlarmAssetLink, AlarmSeverity, AlarmStatus, SentAlarm} from "@openremote/model";
 
 // ---------------- CONFIG ----------------
 export interface AlarmWidgetConfig extends WidgetConfig {
     tableOptions: number[];
-
+    tableSize: number;
 }
 interface AlarmModel extends SentAlarm {
     loaded?: boolean;
@@ -24,34 +24,18 @@ interface AlarmModel extends SentAlarm {
 }
 
 function getDefaultWidgetConfig(): AlarmWidgetConfig {
-    return {tableOptions: []};
+    return {tableOptions: [],tableSize:10};
 }
 
-//TODO: Fiks overflow
 const styling = css`
     #widget-container {
         height: 100%;
         overflow: scroll;
     }
-    
-    :host {
-        display: block !important;
-        width: 100% !important;
-        height: 100% !important;
-        min-height: 0 !important; /* CRITICAL for flex children */
+    #widget-wrapper {
+        height: 100%;
+        overflow: hidden;
     }
-    .mdc-data-table {
-        display: flex !important;
-        flex-direction: column !important;
-        width: 100% !important;
-        height: 100% !important;
-        min-height: 0 !important;
-    }
-    .mdc-data-table__table-container {
-        flex: 1 1 auto !important;
-        overflow: auto !important;
-        min-height: 0 !important;
-    }    
 `
 
 
@@ -101,9 +85,6 @@ export class AlarmWidget extends OrAssetWidget {
                 case AlarmStatus.IN_PROGRESS:
                     alarmList.push(alarm);
                     break;
-                case AlarmStatus.ACKNOWLEDGED:
-                    alarmList.push(alarm);
-                    break;
                 default:
                     break;
             }
@@ -132,8 +113,7 @@ export class AlarmWidget extends OrAssetWidget {
 
             this.alarms = tempAlarms.filter(a =>
                 a.status === AlarmStatus.OPEN ||
-                a.status === AlarmStatus.IN_PROGRESS ||
-                a.status === AlarmStatus.ACKNOWLEDGED
+                a.status === AlarmStatus.IN_PROGRESS
             );
         } finally {
             this.loading = false;
@@ -148,11 +128,13 @@ export class AlarmWidget extends OrAssetWidget {
 
         const columns: TableColumn[] = [
             { title: i18next.t("createdOn"), isSortable: true },
-            { title: i18next.t("severity"), isSortable: true },
-            { title: i18next.t("status"), isSortable: true},
-            { title: i18next.t("title"), isSortable: true },
-            { title: i18next.t("content"), isSortable: false }
+            { title: i18next.t("alarm.severity"), isSortable: true },
+            { title: i18next.t("alarm.status"), isSortable: true},
+            { title: i18next.t("alarm.title"), isSortable: true },
         ];
+
+
+
         const rows: TableRow[] = this.alarms.map(a => ({
 
                 content: [
@@ -160,7 +142,6 @@ export class AlarmWidget extends OrAssetWidget {
                     a.severity ?? "",
                     a.status ?? "",
                     a.title ?? "",
-                    a.content ?? ""
                 ]
             }
         ));
@@ -173,12 +154,21 @@ export class AlarmWidget extends OrAssetWidget {
             }
         } as TableConfig
 
-        return html`            
+        return html`
             <div id="widget-wrapper">
-                <or-mwc-table .columns="${columns}" .rows="${rows}" .config="${tableConfig}" .paginationSize="${0}"}"
+                <or-mwc-table .columns="${columns}" .rows="${rows}" .config="${tableConfig}" .paginationSize="${this.widgetConfig.tableSize}"
+                              @or-mwc-table-row-click="${(ev: OrMwcTableRowClickEvent) => this.onTableRowClick(ev)}"
                 ></or-mwc-table>
-        </div>
+                <style>
+                    td[title="LOW"] {color:green;}
+                    td[title="MEDIUM"] {color:orange;}
+                    td[title="HIGH"] {color:red;}
+                </style>
+            </div>
         `;
+    }
+    protected onTableRowClick(ev: OrMwcTableRowClickEvent) {
+
     }
 }
 
