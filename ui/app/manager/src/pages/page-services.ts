@@ -296,7 +296,9 @@ export class PageServices extends Page<AppStateKeyed> {
     protected _refreshIframe(): void {
         const servicesComponent = this.shadowRoot?.querySelector("or-services") as any;
         if (servicesComponent && typeof servicesComponent.refreshIframe === "function") {
-            servicesComponent.refreshIframe();
+            if(confirm("Are you sure you want to refresh?")) {
+                servicesComponent.refreshIframe();
+            }
         } else {
             console.warn("Unable to reload iframe: services component not found or refreshIframe method not available");
         }

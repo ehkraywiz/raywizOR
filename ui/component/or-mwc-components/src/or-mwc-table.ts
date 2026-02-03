@@ -157,6 +157,20 @@ const style = css`
             display: none;
         }
     }
+    .mdc-data-table__row:hover {
+        filter: brightness(0.97);
+    }
+    .row-high {
+         background-color: #fdecea;
+     }
+
+    .row-medium {
+        background-color: #fff4e5;
+    }
+
+    .row-low {
+        background-color: #e8f5e9;
+    }
 `;
 
 export interface TableConfig {
@@ -182,6 +196,8 @@ export type TableContent = string | number | Date | TemplateResult
 export interface TableRow {
     content?: TableContent[]
     clickable?: boolean
+    rowClass?: string;
+    rowStyle?: Record<string, string>;
 }
 
 export interface OrMwcTableRowClickDetail {
@@ -393,7 +409,16 @@ export class OrMwcTable extends LitElement {
                                             .map((item: TableRow | string[]) => {
                                                 const content: TableContent[] | undefined = (Array.isArray(item) ? item : (item as TableRow).content);
                                                 return html`
-                                                    <tr class="mdc-data-table__row" @click="${(ev: MouseEvent) => this.onRowClick(ev, item)}">
+                                                    <tr
+                                                        class=${classMap({
+                                                            "mdc-data-table__row": true,
+                                                            ...(item as TableRow).rowClass
+                                                                    ? { [(item as TableRow).rowClass!]: true }
+                                                                    : {}
+                                                        })}
+                                                        style=${styleMap((item as TableRow).rowStyle ?? {})}
+                                                        @click="${(ev: MouseEvent) => this.onRowClick(ev, item)}"
+                                                >
                                                         ${content?.map((cell: TableContent, index: number) => {
                                                             const classes = {
                                                                 "mdc-data-table__cell": true,

@@ -33,4 +33,8 @@ public class NodeAsset extends Asset<NodeAsset> {
     public static final AttributeDescriptor<Double> report_stop = new AttributeDescriptor<>         ("RapportStopp", ValueType.NUMBER , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
     public static final AttributeDescriptor<Boolean> report_speed = new AttributeDescriptor<>       ("RapporterHastighet", ValueType.BOOLEAN , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
     public static final AttributeDescriptor<Boolean> report_dim = new AttributeDescriptor<>         ("RapporterDimensjoner", ValueType.BOOLEAN , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<String> versionAPI = new AttributeDescriptor<>          ("VersionAPI", ValueType.TEXT , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<String> versionOuster = new AttributeDescriptor<>       ("VersionOuster", ValueType.TEXT , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<String> versionSoftware = new AttributeDescriptor<>     ("VersionSoftware", ValueType.TEXT , new MetaItem<>(MetaItemType.RULE_STATE),new MetaItem<>(MetaItemType.AGENT_LINK));
+
 }

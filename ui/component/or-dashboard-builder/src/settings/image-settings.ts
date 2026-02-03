@@ -72,6 +72,8 @@ export class ImageSettings extends AssetWidgetSettings {
                         <or-mwc-input style="width: 100%;" type="${InputType.TEXT}" label="${i18next.t('dashboard.imageUrl')}" .value="${this.widgetConfig.imagePath}"
                                       @or-mwc-input-changed="${(ev: OrInputChangedEvent) => this.onImageUrlUpdate(ev)}"
                         ></or-mwc-input>
+                        <or-mwc-input style="width: 100%;" type="${InputType.CHECKBOX}" label="${i18next.t('dashboard.refreshInterval')}" .value="${this.widgetConfig.enableRefreshControls}"
+                                      @or-mwc-input-changed="${(ev: OrInputChangedEvent) => this.onRefreshControls(ev)}"
                     </div>
                 </settings-panel>
             </div>
@@ -85,6 +87,11 @@ export class ImageSettings extends AssetWidgetSettings {
 
     protected onImageUrlUpdate(ev: OrInputChangedEvent) {
         this.widgetConfig.imagePath = ev.detail.value;
+        this.notifyConfigUpdate();
+    }
+
+    protected onRefreshControls(ev: OrInputChangedEvent) {
+        this.widgetConfig.enableRefreshControls = ev.detail.value;
         this.notifyConfigUpdate();
     }
 

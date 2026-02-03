@@ -16,6 +16,7 @@ export interface AlarmWidgetConfig extends WidgetConfig {
     tableOptions: number[];
     tableSize: number;
 }
+
 interface AlarmModel extends SentAlarm {
     loaded?: boolean;
     loading?: boolean;
@@ -24,7 +25,7 @@ interface AlarmModel extends SentAlarm {
 }
 
 function getDefaultWidgetConfig(): AlarmWidgetConfig {
-    return {tableOptions: [],tableSize:10};
+    return {tableOptions: [], tableSize: 10};
 }
 
 const styling = css`
@@ -32,10 +33,33 @@ const styling = css`
         height: 100%;
         overflow: scroll;
     }
+
     #widget-wrapper {
         height: 100%;
         overflow: hidden;
     }
+
+    .severity {
+        font-weight: 600;
+    }
+
+    .sev-high {
+        color: #d32f2f !important; /* red */
+    }
+
+    .sev-medium {
+        color: #f57c00 !important; /* orange */
+    }
+
+    .sev-low {
+        color: #388e3c !important; /* green */
+    }
+
+    .sev-unknown {
+        color: #666;
+    }
+
+
 `
 
 
@@ -68,16 +92,17 @@ export class AlarmWidget extends OrAssetWidget {
             }
         };
     }
+
     @state()
     private alarms: AlarmModel[] = [];
 
     public async refreshContent(force: boolean) {
         const mgr = manager;
         const realm = mgr.displayRealm;
-        const response = await mgr.rest.api.AlarmResource.getAlarms({realm}, undefined, );
+        const response = await mgr.rest.api.AlarmResource.getAlarms({realm}, undefined,);
         const tempAlarms = response.data as AlarmModel[];
-        const alarmList:AlarmModel[] = []
-        for(const alarm of tempAlarms) {
+        const alarmList: AlarmModel[] = []
+        for (const alarm of tempAlarms) {
             switch (alarm.status) {
                 case AlarmStatus.OPEN:
                     alarmList.push(alarm);
@@ -108,7 +133,7 @@ export class AlarmWidget extends OrAssetWidget {
             const mgr = manager;
             const realm = mgr.displayRealm;
 
-            const response = await mgr.rest.api.AlarmResource.getAlarms({ realm });
+            const response = await mgr.rest.api.AlarmResource.getAlarms({realm});
             const tempAlarms = response.data as AlarmModel[];
 
             this.alarms = tempAlarms.filter(a =>
@@ -121,30 +146,40 @@ export class AlarmWidget extends OrAssetWidget {
         }
     }
 
+    private severityRowClass(sev?: AlarmSeverity): string {
+        switch (sev) {
+            case AlarmSeverity.HIGH:
+                return "row-high";
+            case AlarmSeverity.MEDIUM:
+                return "row-medium";
+            case AlarmSeverity.LOW:
+                return "row-low";
+            default:
+                return "";
+        }
+    }
 
 
     protected render(): TemplateResult {
         console.log("rendering");
 
         const columns: TableColumn[] = [
-            { title: i18next.t("createdOn"), isSortable: true },
-            { title: i18next.t("alarm.severity"), isSortable: true },
-            { title: i18next.t("alarm.status"), isSortable: true},
-            { title: i18next.t("alarm.title"), isSortable: true },
+            {title: i18next.t("createdOn"), isSortable: true},
+            {title: i18next.t("alarm.severity"), isSortable: true},
+            {title: i18next.t("alarm.status"), isSortable: true},
+            {title: i18next.t("alarm.title"), isSortable: true},
         ];
 
 
-
         const rows: TableRow[] = this.alarms.map(a => ({
-
-                content: [
-                    a.createdOn ? new Date(a.createdOn) : "",
-                    a.severity ?? "",
-                    a.status ?? "",
-                    a.title ?? "",
-                ]
-            }
-        ));
+            rowClass: this.severityRowClass(a.severity),
+            content: [
+                a.createdOn ? new Date(a.createdOn) : "",
+                a.severity ?? "",
+                a.status ?? "",
+                a.title ?? "",
+            ]
+        }));
 
         const tableConfig: any = {
             fullHeight: true,
@@ -156,17 +191,14 @@ export class AlarmWidget extends OrAssetWidget {
 
         return html`
             <div id="widget-wrapper">
-                <or-mwc-table .columns="${columns}" .rows="${rows}" .config="${tableConfig}" .paginationSize="${this.widgetConfig.tableSize}"
+                <or-mwc-table .columns="${columns}" .rows="${rows}" .config="${tableConfig}"
+                              .paginationSize="${this.widgetConfig.tableSize}"
                               @or-mwc-table-row-click="${(ev: OrMwcTableRowClickEvent) => this.onTableRowClick(ev)}"
                 ></or-mwc-table>
-                <style>
-                    td[title="LOW"] {color:green;}
-                    td[title="MEDIUM"] {color:orange;}
-                    td[title="HIGH"] {color:red;}
-                </style>
             </div>
         `;
     }
+
     protected onTableRowClick(ev: OrMwcTableRowClickEvent) {
 
     }

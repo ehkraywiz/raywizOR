@@ -57,6 +57,7 @@ export interface ImageWidgetConfig extends AssetWidgetConfig {
     markers: ImageAssetMarker[];
     showTimestampControls: boolean;
     imagePath: string;
+    enableRefreshControls: boolean;
 }
 
 function getDefaultWidgetConfig(): ImageWidgetConfig {
@@ -65,6 +66,7 @@ function getDefaultWidgetConfig(): ImageWidgetConfig {
         showTimestampControls: false,
         imagePath: '',
         markers: [],
+        enableRefreshControls: true,
     };
 }
 
@@ -144,6 +146,7 @@ export class ImageWidget extends OrAssetWidget {
                     const attribute = asset.attributes![attributeRef.name!];
                     const descriptors = AssetModelUtil.getAttributeAndValueDescriptors(asset.type, attributeRef.name, attribute);
                     value = Util.getAttributeValueAsString(attribute, descriptors[0], asset.type, true, "-");
+
                     if(attribute?.type === WellknownValueTypes.COLOURRGB && value !== "-") {
                         styles.backgroundColor = value;
                         styles.minHeight = "21px";
@@ -161,7 +164,7 @@ export class ImageWidget extends OrAssetWidget {
     }
 
     protected render(): TemplateResult {
-        const imagePath = this.widgetConfig.imagePath;
+        const imagePath = this.widgetConfig.enableRefreshControls ? this.widgetConfig.imagePath + `?t=${new Date().getTime()}` : this.widgetConfig.imagePath;
         return html`
             <div id="img-wrapper">
                 ${when(imagePath, () => html`
@@ -177,5 +180,4 @@ export class ImageWidget extends OrAssetWidget {
             </div>
         `;
     }
-
 }
