@@ -33,7 +33,9 @@
                   "include": []
                 },
                 "attributes": {
-                  "include": ["notes"]
+                  "include": [
+                    "notes"
+                  ]
                 }
               },
               {
@@ -105,7 +107,9 @@
                   "include": []
                 },
                 "attributes": {
-                  "include": ["notes"]
+                  "include": [
+                    "notes"
+                  ]
                 }
               },
               {
@@ -177,6 +181,13 @@
             ]
           }
         }
+      }
+    },
+    "map": {
+      "clustering": {
+        "cluster": false,
+        "clusterRadius": 180,
+        "clusterMaxZoom": 12
       }
     }
   }

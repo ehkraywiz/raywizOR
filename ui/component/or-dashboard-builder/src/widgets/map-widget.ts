@@ -6,7 +6,7 @@ import {WidgetSettings} from "../util/widget-settings";
 import {MapSettings} from "../settings/map-settings";
 import {AssetWidgetConfig} from "../util/widget-config";
 import {Asset, AssetDescriptor} from "@openremote/model";
-import {LngLatLike, MapMarkerColours, MapMarkerAssetConfig, Util as MapUtil, OrMap, AssetWithLocation, OrMapMarkersChangedEvent, MapMarkerConfig} from "@openremote/or-map";
+import {LngLatLike, MapMarkerColours, MapMarkerAssetConfig, Util as MapUtil, ClusterConfig, OrMap, AssetWithLocation, OrMapMarkersChangedEvent, MapMarkerConfig} from "@openremote/or-map";
 import {map} from "lit/directives/map.js";
 import manager from "@openremote/core";
 import { showSnackbar } from "@openremote/or-mwc-components/or-mwc-snackbar";
@@ -36,6 +36,7 @@ export interface MapWidgetConfig extends AssetWidgetConfig {
     assetTypes: AssetDescriptor[],
     assetIds: string[],
     attributes: string[],
+    clusterConfig: ClusterConfig
 }
 
 function getDefaultWidgetConfig(): MapWidgetConfig {
@@ -52,6 +53,11 @@ function getDefaultWidgetConfig(): MapWidgetConfig {
         allOfType: true,
         assetIds: [],
         attributes: [],
+        clusterConfig: {
+            cluster:false,
+            clusterRadius:180,
+            clusterMaxZoom:14
+        },
     } as MapWidgetConfig;
 }
 
@@ -144,7 +150,7 @@ export class MapWidget extends OrAssetWidget {
     protected render(): TemplateResult {
         return html`
             <div style="height: 100%; display: flex; flex-direction: column; overflow: hidden;">
-                <or-map id="miniMap" class="or-map" .zoom="${this.widgetConfig.zoom}" .center="${this.widgetConfig.center}" .showGeoJson="${this.widgetConfig.showGeoJson}" style="flex: 1;">
+                <or-map id="miniMap" class="or-map" .zoom="${this.widgetConfig.zoom}" .center="${this.widgetConfig.center}" .showGeoJson="${this.widgetConfig.showGeoJson}" .cluster="${this.widgetConfig.clusterConfig}" style="flex: 1;">
                     ${map(this._assetsOnScreen, (asset) => html`
                         <or-map-marker-asset .asset="${asset}" .config="${this.markers}"></or-map-marker-asset>
                     `)}
