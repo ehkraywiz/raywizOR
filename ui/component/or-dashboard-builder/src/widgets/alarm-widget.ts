@@ -161,12 +161,12 @@ export class AlarmWidget extends OrAssetWidget {
 
 
     protected render(): TemplateResult {
-        console.log("rendering");
 
         const columns: TableColumn[] = [
             {title: i18next.t("createdOn"), isSortable: true},
             {title: i18next.t("alarm.severity"), isSortable: true},
             {title: i18next.t("alarm.status"), isSortable: true},
+            {title: i18next.t("linkedAssets"), isSortable: true},
             {title: i18next.t("alarm.title"), isSortable: true},
         ];
 
@@ -177,7 +177,8 @@ export class AlarmWidget extends OrAssetWidget {
                 a.createdOn ? new Date(a.createdOn) : "",
                 a.severity ?? "",
                 a.status ?? "",
-                a.title ?? "",
+                a.asset?.[0]?.name ?? "",
+                a.title ?? ""
             ]
         }));
 
