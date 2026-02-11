@@ -28,6 +28,9 @@ function getDefaultWidgetConfig(): AlarmWidgetConfig {
     return {tableOptions: [], tableSize: 10};
 }
 
+const tString = (key?: string): string =>
+    key ? i18next.t(key, { defaultValue: "" }) as string : "";
+
 const styling = css`
     #widget-container {
         height: 100%;
@@ -164,10 +167,10 @@ export class AlarmWidget extends OrAssetWidget {
 
         const columns: TableColumn[] = [
             {title: i18next.t("createdOn"), isSortable: true},
+            {title: i18next.t("alarm.title"), isSortable: true},
             {title: i18next.t("alarm.severity"), isSortable: true},
             {title: i18next.t("alarm.status"), isSortable: true},
             {title: i18next.t("linkedAssets"), isSortable: true},
-            {title: i18next.t("alarm.title"), isSortable: true},
         ];
 
 
@@ -175,10 +178,10 @@ export class AlarmWidget extends OrAssetWidget {
             rowClass: this.severityRowClass(a.severity),
             content: [
                 a.createdOn ? new Date(a.createdOn) : "",
-                a.severity ?? "",
-                a.status ?? "",
-                a.asset?.[0]?.name ?? "",
-                a.title ?? ""
+                a.title ?? "",
+                tString(a.severity && `alarm.severity_${a.severity}`),
+                tString(a.status && `alarm.status_${a.status}`),
+                a.asset?.[0]?.name ?? ""
             ]
         }));
 
