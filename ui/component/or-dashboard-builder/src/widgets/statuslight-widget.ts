@@ -10,12 +10,16 @@ import "@openremote/or-attribute-card";
 import {i18next} from "@openremote/or-translate";
 import {AlarmWidgetConfig} from "@dashboard/widgets/alarm-widget";
 import manager from "@openremote/core";
+import {StatuslightSettings} from "../settings/statuslight-settings";
 
 export interface StatuslightWidgetConfig extends AssetWidgetConfig {
     period?: 'year' | 'month' | 'week' | 'day' | 'hour';
     decimals: number;
     deltaFormat: "absolute" | "percentage";
     showTimestampControls: boolean;
+    min: number;
+    max: number;
+    thresholds: [number, string][];
 }
 
 function getDefaultWidgetConfig(): StatuslightWidgetConfig {
@@ -23,6 +27,9 @@ function getDefaultWidgetConfig(): StatuslightWidgetConfig {
         attributeRefs: [],
         period: "day",
         decimals: 0,
+        min: 0,
+        max: 255,
+        thresholds: [[0, "#15CB21"], [1, "#FFC000"], [2,"#E01B24"]],
         deltaFormat: "absolute",
         showTimestampControls: false
     };
@@ -56,17 +63,6 @@ const styling = css`
         background-clip: padding-box;
         display: grid;
         place-items: center;
-    }
-    #critical {
-        background-color: red;
-        border: black solid 6px;
-    }
-    #warning {
-        background-color: darkorange;
-        border: black solid 6px;
-    }
-    #okidoki {
-        background-color: #0f0;
         border: black solid 6px;
     }
     .inactive {
@@ -106,7 +102,7 @@ export class StatuslightWidget extends OrAssetWidget {
                 return new StatuslightWidget(config);
             },
             getSettingsHtml(config: StatuslightWidgetConfig): WidgetSettings {
-                return new StatuslightWidgetSettings(config);
+                return new StatuslightSettings(config);
             },
             getDefaultConfig(): StatuslightWidgetConfig {
                 return getDefaultWidgetConfig();
@@ -172,21 +168,12 @@ export class StatuslightWidget extends OrAssetWidget {
     protected render(): TemplateResult {
         return html`
             <div class="lightwrapper">
-                <div class="light ${this.lightStatus !== Statuslight.CRITICAL ? 'inactive' : ''}" id="critical">Active <br> Alarm</div>
-                <div class="light ${this.lightStatus !== Statuslight.ERROR ? 'inactive' : ''}" id="warning">Warning</div>
-                <div class="light ${this.lightStatus !== Statuslight.OK ? 'inactive' : ''}" id="okidoki">OK</div>
+                <div class="light ${this.lightStatus !== Statuslight.CRITICAL ? 'inactive' : ''}" id="critical" style="background-color: ${this.widgetConfig.thresholds[2][1]}">Active <br> Alarm</div>
+                <div class="light ${this.lightStatus !== Statuslight.ERROR ? 'inactive' : ''}" id="warning" style="background-color: ${this.widgetConfig.thresholds[1][1]}">Warning</div>
+                <div class="light ${this.lightStatus !== Statuslight.OK ? 'inactive' : ''}" id="okidoki" style="background-color: ${this.widgetConfig.thresholds[0][1]}">OK</div>
             </div>
         `;
     }
 
 }
-@customElement("statuslight-widget-settings")
-export class StatuslightWidgetSettings extends WidgetSettings {
-    protected readonly widgetConfig!: AlarmWidgetConfig;
 
-    protected render(): TemplateResult {
-        return html`
-      <span>${i18next.t("noSettingsAvailable")}</span>
-    `;
-    }
-}
