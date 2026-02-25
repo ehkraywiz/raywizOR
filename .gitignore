@@ -49,7 +49,6 @@ local.properties
 .env
 
 # File extensions
-*.mbtiles
 *.air
 *.ipa
 *.apk
