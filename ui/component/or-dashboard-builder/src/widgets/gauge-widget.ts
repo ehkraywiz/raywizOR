@@ -41,6 +41,29 @@ const styling = css`
 @customElement("gauge-widget")
 export class GaugeWidget extends OrAssetWidget {
 
+    protected onAttributeValueChanged(
+        assetId: string,
+        attributeName: string,
+        attribute: Attribute<any>
+    ) {
+        // update cached attribute reference
+        const index = this.assetAttributes.findIndex(
+            ([assetIndex, attr]) =>
+                this.loadedAssets[assetIndex].id === assetId &&
+                attr.name === attributeName
+        );
+
+        if (index >= 0) {
+            this.assetAttributes[index] = [
+                this.assetAttributes[index][0],
+                attribute
+            ];
+
+            // trigger Lit reactivity
+            this.assetAttributes = [...this.assetAttributes];
+        }
+    }
+
     // Override of widgetConfig with extended type
     protected widgetConfig!: GaugeWidgetConfig;
 

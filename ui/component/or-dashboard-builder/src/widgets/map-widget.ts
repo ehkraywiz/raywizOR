@@ -37,6 +37,7 @@ export interface MapWidgetConfig extends AssetWidgetConfig {
     assetIds: string[],
     attributes: string[],
     clusterConfig: ClusterConfig
+    alarmColor: string,
 }
 
 function getDefaultWidgetConfig(): MapWidgetConfig {
@@ -54,10 +55,11 @@ function getDefaultWidgetConfig(): MapWidgetConfig {
         assetIds: [],
         attributes: [],
         clusterConfig: {
-            cluster:false,
-            clusterRadius:180,
-            clusterMaxZoom:14
+            cluster: false,
+            clusterRadius: 180,
+            clusterMaxZoom: 14
         },
+        alarmColor: "#FF000"
     } as MapWidgetConfig;
 }
 
