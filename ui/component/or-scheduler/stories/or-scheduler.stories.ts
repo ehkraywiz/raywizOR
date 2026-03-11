@@ -19,7 +19,7 @@
  */
 import { html } from "lit";
 import { setCustomElementsManifest, type Meta, type StoryObj } from "@storybook/web-components";
-import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
+import { getORStorybookHelpers } from "../../storybook-utils.js";
 import customElements from "../custom-elements.json" with { type: "json" };
 import packageJson from "../package.json" with { type: "json" };
 import manager from "@openremote/core";
@@ -30,7 +30,7 @@ const tagName = "or-scheduler";
 type Story = StoryObj;
 setCustomElementsManifest(customElements);
 
-const { events, args, argTypes, template } = getStorybookHelpers(tagName);
+const { events, args, argTypes, template } = getORStorybookHelpers(tagName);
 
 const meta: Meta = {
     title: "Playground/or-scheduler",
