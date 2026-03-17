@@ -65,6 +65,16 @@ const styling = css`
         place-items: center;
         border: black solid 6px;
     }
+    
+    .light p {
+        color: white;
+        text-shadow:
+                -1px -1px 0 black, 
+                1px -1px 0 black, 
+                -1px  1px 0 black, 
+                1px  1px 0 black; 
+        
+    }
     .inactive {
         filter: grayscale(0.9);
         border: transparent !important;
@@ -168,9 +178,9 @@ export class StatuslightWidget extends OrAssetWidget {
     protected render(): TemplateResult {
         return html`
             <div class="lightwrapper">
-                <div class="light ${this.lightStatus !== Statuslight.CRITICAL ? 'inactive' : ''}" id="critical" style="background-color: ${this.widgetConfig.thresholds[2][1]}">Active <br> Alarm</div>
-                <div class="light ${this.lightStatus !== Statuslight.ERROR ? 'inactive' : ''}" id="warning" style="background-color: ${this.widgetConfig.thresholds[1][1]}">Warning</div>
-                <div class="light ${this.lightStatus !== Statuslight.OK ? 'inactive' : ''}" id="okidoki" style="background-color: ${this.widgetConfig.thresholds[0][1]}">OK</div>
+                <div class="light ${this.lightStatus !== Statuslight.CRITICAL ? 'inactive' : ''}" id="critical" style="background-color: ${this.widgetConfig.thresholds[2][1]}"><p>Active <br> Alarm</p></div>
+                <div class="light ${this.lightStatus !== Statuslight.ERROR ? 'inactive' : ''}" id="warning" style="background-color: ${this.widgetConfig.thresholds[1][1]}"><p>Warning</p></div>
+                <div class="light ${this.lightStatus !== Statuslight.OK ? 'inactive' : ''}" id="okidoki" style="background-color: ${this.widgetConfig.thresholds[0][1]}"><p>OK</p></div>
             </div>
         `;
     }
