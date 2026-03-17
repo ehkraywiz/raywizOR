@@ -59,7 +59,7 @@ services:
   manager:
 #    privileged: true
     restart: always
-    image: eirikraywiz/openremote:custom
+    image: eirikraywiz/openremote:${OR_IMAGE_TAG:-custom}
     depends_on:
       keycloak:
         condition: service_healthy
