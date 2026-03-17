@@ -513,6 +513,8 @@ public abstract class WebService implements ContainerService {
         // Get list of external hostnames
         String defaultHostname = Config.getString(OR_HOSTNAME, null);
         String additionalHostnamesStr = Config.getString(OR_ADDITIONAL_HOSTNAMES, null);
+        LOG.log(INFO,"Default Hostname: " + defaultHostname);
+        LOG.log(INFO,"Additional hostnames: " + additionalHostnamesStr);
 
         List<String> externalHostnames = new ArrayList<>();
 
