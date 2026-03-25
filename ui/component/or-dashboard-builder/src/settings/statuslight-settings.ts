@@ -33,10 +33,10 @@ export class StatuslightSettings extends WidgetSettings {
                     <div style="padding-bottom: 12px; display: flex; flex-direction: column; gap: 12px;">
                         <div style="display: flex; gap: 8px;">
                             <or-mwc-input .type="${InputType.NUMBER}" label="${i18next.t('min')}" .max="${this.widgetConfig.max}" .value="${this.widgetConfig.min}"
-                                          @or-mwc-input-changed="${(ev: OrInputChangedEvent) => this.onMinMaxValueChange('min', ev)}"
+                                          @or-mwc-input-changed="${(ev: OrInputChangedEvent) => null}"
                             ></or-mwc-input>
                             <or-mwc-input .type="${InputType.NUMBER}" label="${i18next.t('max')}" .min="${this.widgetConfig.min}" .value="${this.widgetConfig.max}"
-                                          @or-mwc-input-changed="${(ev: OrInputChangedEvent) => this.onMinMaxValueChange('max', ev)}"
+                                          @or-mwc-input-changed="${(ev: OrInputChangedEvent) => null}"
                             ></or-mwc-input>
                         </div>
                         <div>
