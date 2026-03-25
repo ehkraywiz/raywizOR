@@ -6,7 +6,8 @@ import {WidgetSettings} from "../util/widget-settings";
 import {MapSettings} from "../settings/map-settings";
 import {AssetWidgetConfig} from "../util/widget-config";
 import {Asset, AssetDescriptor} from "@openremote/model";
-import {LngLatLike, MapMarkerColours, MapMarkerAssetConfig, Util as MapUtil, ClusterConfig, OrMap, AssetWithLocation, OrMapMarkersChangedEvent, MapMarkerConfig} from "@openremote/or-map";
+import {LngLatLike, MapMarkerColours, MapMarkerAssetConfig, Util as MapUtil, OrMap, AssetWithLocation, OrMapMarkersChangedEvent, MapMarkerConfig, OrMapLoadedEvent} from "@openremote/or-map";
+import {ClusterConfig} from "@openremote/or-map";
 import {map} from "lit/directives/map.js";
 import manager from "@openremote/core";
 import { showSnackbar } from "@openremote/or-mwc-components/or-mwc-snackbar";
@@ -95,11 +96,13 @@ export class MapWidget extends OrAssetWidget {
     }
 
     connectedCallback() {
+        this.addEventListener(OrMapLoadedEvent.NAME, this._onMapLoaded);
         this.addEventListener(OrMapMarkersChangedEvent.NAME, this._onMapMarkersChanged);
         return super.connectedCallback();
     }
 
     disconnectedCallback() {
+        this.removeEventListener(OrMapLoadedEvent.NAME, this._onMapLoaded);
         this.removeEventListener(OrMapMarkersChangedEvent.NAME, this._onMapMarkersChanged);
         return super.disconnectedCallback();
     }
@@ -152,13 +155,19 @@ export class MapWidget extends OrAssetWidget {
     protected render(): TemplateResult {
         return html`
             <div style="height: 100%; display: flex; flex-direction: column; overflow: hidden;">
-                <or-map id="miniMap" class="or-map" .zoom="${this.widgetConfig.zoom}" .center="${this.widgetConfig.center}" .showGeoJson="${this.widgetConfig.showGeoJson}" .cluster="${this.widgetConfig.clusterConfig}" style="flex: 1;">
+                <or-map id="miniMap" class="or-map" .zoom="${this.widgetConfig.zoom}" .center="${this.widgetConfig.center}" .showGeoJson="${this.widgetConfig.showGeoJson}" style="flex: 1;">
                     ${map(this._assetsOnScreen, (asset) => html`
                         <or-map-marker-asset .asset="${asset}" .config="${this.markers}"></or-map-marker-asset>
                     `)}
                 </or-map>
             </div>
         `;
+    }
+
+    protected _onMapLoaded(e: OrMapLoadedEvent) {
+        const assetType = this.widgetConfig.allOfType ? undefined : this.widgetConfig.assetType;
+        const assets = this.loadedAssets.filter(asset => !assetType || asset.type === assetType).filter(MapUtil.isAssetWithLocation);
+        this._map?.addAssets(assets);
     }
 
     protected _onMapMarkersChanged(e: OrMapMarkersChangedEvent) {
