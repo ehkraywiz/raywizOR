@@ -22,6 +22,7 @@ type IdentifiableAsset = AssetWithLocation & { id: string; type: string };
  *
  * @todo consider using `this._map.setGlobalStateProperty` for static cluster property
  */
+
 export class AssetMap extends BaseMap {
     private static _clusterProperty = "assetType";
 
@@ -287,11 +288,11 @@ export class AssetMap extends BaseMap {
     }
 
     private static _assetToFeature({
-        id,
-        type,
-        name,
-        attributes,
-    }: IdentifiableAsset): Feature<Point, { id: string; name?: string; [AssetMap._clusterProperty]: string }> {
+                                       id,
+                                       type,
+                                       name,
+                                       attributes,
+                                   }: IdentifiableAsset): Feature<Point, { id: string; name?: string; [AssetMap._clusterProperty]: string }> {
         return {
             type: "Feature",
             geometry: attributes.location.value,

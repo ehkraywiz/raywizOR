@@ -278,6 +278,7 @@ export const geoJsonPointInputTemplateProvider: ValueInputProviderGenerator = (a
     };
 }
 
+
 @customElement("or-map")
 export class OrMap extends LitElement {
 

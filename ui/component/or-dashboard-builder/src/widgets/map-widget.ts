@@ -213,15 +213,5 @@ export class MapWidget extends OrAssetWidget {
             }
             this.markers[assetType!] = marker;
         }
-        // Load the markers onto the map
-        if (this._map) {
-            this._map.cleanUpAssetMarkers();
-            const assetType = this.widgetConfig.allOfType ? undefined : this.widgetConfig.assetType;
-            this.loadedAssets
-                .filter(asset => MapUtil.isAssetWithLocation(asset) && (!assetType || asset.type === assetType))
-                .forEach((asset: Asset) => this._map!.addAssetMarker(asset as AssetWithLocation));
-
-            this._map?.reload();
-        }
     }
 }
