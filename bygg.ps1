@@ -1,8 +1,7 @@
 param($tag)
 $env:OR_IMAGE_TAG = $null
 docker compose down
-docker compose down
-
+#docker image prune -f
 
 ./gradlew clean installDist #clean for å rense cache, installDist er navnet på gradle tasken som faktisk bygger Manager.
 

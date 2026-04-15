@@ -155,7 +155,7 @@ export class MapWidget extends OrAssetWidget {
     protected render(): TemplateResult {
         return html`
             <div style="height: 100%; display: flex; flex-direction: column; overflow: hidden;">
-                <or-map id="miniMap" class="or-map" .zoom="${this.widgetConfig.zoom}" .center="${this.widgetConfig.center}" .showGeoJson="${this.widgetConfig.showGeoJson}" style="flex: 1;">
+                <or-map id="miniMap" class="or-map" .zoom="${this.widgetConfig.zoom}" .center="${this.widgetConfig.center}" .cluster="${this.widgetConfig.clusterConfig}" .showGeoJson="${this.widgetConfig.showGeoJson}" style="flex: 1;">
                     ${map(this._assetsOnScreen, (asset) => html`
                         <or-map-marker-asset .asset="${asset}" .config="${this.markers}"></or-map-marker-asset>
                     `)}
