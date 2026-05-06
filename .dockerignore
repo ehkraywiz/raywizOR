@@ -3,3 +3,6 @@
 **/.idea
 **/.node
 **/.vagrant
+*.crt
+*.pem
+*.key

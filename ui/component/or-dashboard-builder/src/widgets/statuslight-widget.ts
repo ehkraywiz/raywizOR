@@ -49,7 +49,6 @@ const styling = css`
     }
     .lightwrapper {
         display: grid;
-        grid-template-rows: repeat(3, 1fr);
         gap: 0.75rem;
         height: 100%;
         width: 100%;
@@ -57,7 +56,7 @@ const styling = css`
     }
     
     .light {
-        height: 100%;
+        width: 80%;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
         background-clip: padding-box;
@@ -176,11 +175,30 @@ export class StatuslightWidget extends OrAssetWidget {
     }
 
     protected render(): TemplateResult {
+        let bgrColorArr = [this.widgetConfig.thresholds[2][1],this.widgetConfig.thresholds[1][1],this.widgetConfig.thresholds[0][1]];
+        let text;
+        let selectedColor;
+        switch(this.lightStatus) {
+            case Statuslight.OK:
+                selectedColor = bgrColorArr[2];
+                text = "OK";
+                break;
+            case Statuslight.ERROR:
+                text = "ERROR";
+                selectedColor = bgrColorArr[1];
+                break;
+            case Statuslight.CRITICAL:
+                text = "CRITICAL ERROR";
+                selectedColor = bgrColorArr[0];
+                break;
+            default:
+                text = "Error in widget";
+                selectedColor = "#112233";
+
+        }
         return html`
             <div class="lightwrapper">
-                <div class="light ${this.lightStatus !== Statuslight.CRITICAL ? 'inactive' : ''}" id="critical" style="background-color: ${this.widgetConfig.thresholds[2][1]}"><p>Active <br> Alarm</p></div>
-                <div class="light ${this.lightStatus !== Statuslight.ERROR ? 'inactive' : ''}" id="warning" style="background-color: ${this.widgetConfig.thresholds[1][1]}"><p>Warning</p></div>
-                <div class="light ${this.lightStatus !== Statuslight.OK ? 'inactive' : ''}" id="okidoki" style="background-color: ${this.widgetConfig.thresholds[0][1]}"><p>OK</p></div>
+                <div class="light" style="background-color: ${selectedColor}">${text}</div>
             </div>
         `;
     }
