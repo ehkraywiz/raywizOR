@@ -71,3 +71,10 @@ component-test-report
 
 
 /tools/provisionering/
+
+**.crt
+**.key
+**.pem
+*.crt
+*.key
+*.pem
