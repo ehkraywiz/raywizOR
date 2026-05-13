@@ -115,7 +115,7 @@ services:
   rayadwizor:
     environment:
       OPENREMOTE_BASE_URL: ${OR_HOSTNAME:-localhost}
-      REG_PATH: ${RAW_REGPATH:-/api/vegvesen/service/}
+      REG_PATH: ${RAW_REGPATH:-/api/master/service/}
       HEARTBEAT_INTERVAL: ${RAW_INTERVAL:-30}
       SERVICE_ID: ${RAW_SERVICE_ID:-rayadwizor}
       OPENREMOTE_VERIFY: ${RAW_VERIFYSSL:-false}
