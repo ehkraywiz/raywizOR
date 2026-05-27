@@ -9,6 +9,9 @@ volumes:
   proxy-data:
   manager-data:
   postgresql-data:
+  zm_data:
+  zm_logs:
+  zm_events:
 
 services:
   proxy:
@@ -132,3 +135,34 @@ services:
         condition: service_healthy
     expose:
       - "5554"
+
+  zoneminder: #TODO: REMOVE
+    image: zmservice-zoneminder
+    container_name: zoneminder
+    expose:
+      - "80"
+      - "443"
+    environment:
+      - TZ=UTC
+    volumes:
+      - zm_data:/var/cache/zoneminder
+      - zm_logs:/var/log/zm
+      - zm_events:/var/lib/zoneminder/events
+    restart: unless-stopped
+
+  zm-connector:
+    image: openremote-service-connector:latest
+    depends_on:
+      - manager
+      - zoneminder
+    environment:
+      OPENREMOTE_BASE_URL: ${OR_HOSTNAME:-localhost}
+      REALM: ${RAW_REALM:-master}
+      SERVICE_ID: ${:-zoneminder}
+      CLIENT_ID: ${-}
+      CLIENT_SECRET: ${-}
+      SERVICE_LABEL: ${-}
+      SERVICE_ICON: ${-}
+      HEARTBEAT_INTERVAL: ${-}
+    ports:
+      - "5001:5001"
