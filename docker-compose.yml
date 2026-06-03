@@ -13,10 +13,18 @@ volumes:
   zm_logs:
   zm_events:
 
+networks:
+  default:
+  zmservice_zoneminder:
+    external: true
+
 services:
   proxy:
     image: openremote/proxy:${PROXY_VERSION:-latest}
     restart: always
+    networks:
+      - default
+      - zmservice_zoneminder
     depends_on:
       manager:
         condition: service_healthy
@@ -27,6 +35,7 @@ services:
       - "127.0.0.1:8404:8404" # Localhost metrics access
       - "${PRIVATE_IP:-127.0.0.1}:8404:8404" # Allows to also expose metrics on a given IP address,
                                              # intended to be IP of the interface of the private subnet of the EC2 VM
+      #- "9443:9443" # Zoneminder
     volumes:
       - proxy-data:/deployment
       - ./deployment/haproxy.cfg:/data/proxy/haproxy.cfg
