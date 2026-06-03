@@ -86,6 +86,7 @@ services:
       OR_ADDITIONAL_HOSTNAMES: ${OR_ADDITIONAL_HOSTNAMES:-}
       OR_SSL_PORT: ${OR_SSL_PORT:--1}
       OR_DEV_MODE: ${OR_DEV_MODE:-false}
+      OR_DATA_POINTS_MAX_AGE_WEEKS: ${OR_DATAPOINT_MAX_AGE_WEEKS:-52}
       JAVA_TOOL_OPTIONS: >-
         -Djavax.net.ssl.trustStore=/deployment/certs/custom-cacerts
         -Djavax.net.ssl.trustStorePassword=changeit
@@ -133,36 +134,5 @@ services:
     depends_on:
       manager:
         condition: service_healthy
-    expose:
-      - "5554"
-
-  zoneminder: #TODO: REMOVE
-    image: zmservice-zoneminder
-    container_name: zoneminder
-    expose:
-      - "80"
-      - "443"
-    environment:
-      - TZ=UTC
-    volumes:
-      - zm_data:/var/cache/zoneminder
-      - zm_logs:/var/log/zm
-      - zm_events:/var/lib/zoneminder/events
-    restart: unless-stopped
-
-  zm-connector:
-    image: openremote-service-connector:latest
-    depends_on:
-      - manager
-      - zoneminder
-    environment:
-      OPENREMOTE_BASE_URL: ${OR_HOSTNAME:-localhost}
-      REALM: ${RAW_REALM:-master}
-      SERVICE_ID: ${:-zoneminder}
-      CLIENT_ID: ${-}
-      CLIENT_SECRET: ${-}
-      SERVICE_LABEL: ${-}
-      SERVICE_ICON: ${-}
-      HEARTBEAT_INTERVAL: ${-}
     ports:
-      - "5001:5001"
+      - "5554"
