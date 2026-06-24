@@ -243,6 +243,7 @@ export class OrIframe extends LitElement {
                     id="or-iframe"
                     src="${this.getSrc()}"
                     class="${!this.loading ? "loaded" : ""}"
+                    sandbox="allow-same-origin"
                 ></iframe>
             </div>
         `;

@@ -112,7 +112,7 @@ services:
 
   tileserver:
     environment:
-      VERBOSE: true
+      VERBOSE: false
       AUTO-TLS: true
       PORT: "9876"
     image: ghcr.io/consbio/mbtileserver:latest
