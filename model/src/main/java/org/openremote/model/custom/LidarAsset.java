@@ -58,7 +58,8 @@ public class LidarAsset extends Asset<LidarAsset> {
     public static final AssetDescriptor<LidarAsset> lidarAssetAssetDescriptor = new AssetDescriptor<>("eye-circle", "00aaaa", LidarAsset.class);
 
     public static final AttributeDescriptor<Date>   dateTime =                  new AttributeDescriptor<>("Dato",               ValueType.DATE_AND_TIME,            new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE), new MetaItem<>(MetaItemType.AGENT_LINK));
-    public static final AttributeDescriptor<String> roadMarker =                new AttributeDescriptor<>("Sensornavn",         ValueType.TEXT,                     new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE), new MetaItem<>(MetaItemType.AGENT_LINK));
+
+    public static final AttributeDescriptor<String> roadMarker =                new AttributeDescriptor<>("Veistrekning",       ValueType.TEXT,                     new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE), new MetaItem<>(MetaItemType.AGENT_LINK));
     public static final AttributeDescriptor<String> model =                     new AttributeDescriptor<>("Sensormodell",       ValueType.TEXT,                     new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE), new MetaItem<>(MetaItemType.AGENT_LINK));
     public static final AttributeDescriptor<String> sensorID =                  new AttributeDescriptor<>("SensorID",           ValueType.TEXT,                     new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.ACCESS_RESTRICTED_WRITE), new MetaItem<>(MetaItemType.AGENT_LINK));
     public static final AttributeDescriptor<Double> latitude =                  new AttributeDescriptor<>("Breddegrad",         ValueType.NUMBER,                   new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.AGENT_LINK), new MetaItem<>(MetaItemType.AGENT_LINK));
@@ -66,10 +67,18 @@ public class LidarAsset extends Asset<LidarAsset> {
     public static final AttributeDescriptor<Double> milliVolt =                 new AttributeDescriptor<>("Millivolt",          ValueType.NUMBER,                   new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.AGENT_LINK)).withUnits(UNITS_MILLI, UNITS_VOLT);
     public static final AttributeDescriptor<Double> temperature =               new AttributeDescriptor<>("Temperatur",         ValueType.NUMBER,                   new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.AGENT_LINK)).withUnits(UNITS_CELSIUS);
     public static final AttributeDescriptor<Double> tilt        =               new AttributeDescriptor<>("Tilt",               ValueType.NUMBER,                   new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.AGENT_LINK)).withUnits(UNITS_DEGREE);
-    public static final AttributeDescriptor<ValueType.ObjectMap[]> alert =      new AttributeDescriptor<>("ListeOverVarsler",            ValueType.JSON_OBJECT.asArray(),    new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
-    public static final AttributeDescriptor<String> mostSevereAlarmSeverity=    new AttributeDescriptor<>("ViktigsteVarselsgrad",        ValueType.TEXT,                     new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
-    public static final AttributeDescriptor<String> mostSevereAlarmMessage=     new AttributeDescriptor<>("ViktigsteFeilmelding",        ValueType.TEXT,                     new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
 
+    public static final AttributeDescriptor<ValueType.ObjectMap[]> alert =      new AttributeDescriptor<>("Varsler",            ValueType.JSON_OBJECT.asArray(),    new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<String> mostSevereAlarmSeverity=    new AttributeDescriptor<>("Varselsgrad",        ValueType.TEXT,                     new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+    public static final AttributeDescriptor<String> mostSevereAlarmMessage=     new AttributeDescriptor<>("Feilmelding",        ValueType.TEXT,                     new MetaItem<>(MetaItemType.RULE_STATE), new MetaItem<>(MetaItemType.STORE_DATA_POINTS));
+
+
+    /*
+    public static final AttributeDescriptor<String[]> alertSource =         new AttributeDescriptor<>("Varslende_Sensor",   ValueType.TEXT.asArray(),           new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<String[]> alertLevel =          new AttributeDescriptor<>("Alvorlighetsgrad",   ValueType.TEXT.asArray(),           new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<String[]> alertMessage =        new AttributeDescriptor<>("Varselsmelding",     ValueType.TEXT.asArray(),           new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
+    public static final AttributeDescriptor<String[]> alertCode =           new AttributeDescriptor<>("Varselskode",        ValueType.TEXT.asArray(),           new MetaItem<>(MetaItemType.STORE_DATA_POINTS), new MetaItem<>(MetaItemType.AGENT_LINK));
+    */
 
     protected LidarAsset() {
     }
