@@ -24,14 +24,12 @@ import org.openremote.model.asset.Asset;
 import org.openremote.model.asset.AssetDescriptor;
 import org.openremote.model.asset.agent.AgentLink;
 import org.openremote.model.asset.agent.DefaultAgentLink;
-import org.openremote.model.asset.impl.ElectricVehicleAsset;
 import org.openremote.model.attribute.MetaItem;
 import org.openremote.model.manager.ConfigurationResource;
 import org.openremote.model.value.*;
 
 import jakarta.persistence.Entity;
 
-import javax.json.JsonObject;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
