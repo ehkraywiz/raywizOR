@@ -169,7 +169,7 @@ jobs:
           echo "ipv6=$PUBLIC_IPV6" >> $GITHUB_OUTPUT
 
       - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           # This will only be available when run by workflow_dispatch otherwise will checkout branch/commit that triggered the workflow
           ref: ${{ steps.process-inputs.outputs.COMMIT }}
@@ -238,7 +238,7 @@ jobs:
           fi
 
       - name: Checkout main repo
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         if: ${{ steps.is_main_repo.outputs.value == 'false' }}
         with:
           repository: ${{ steps.is_main_repo.outputs.repository }}
@@ -277,7 +277,7 @@ jobs:
 
       - name: Set up JDK 21 and gradle cache
         id: java
-        uses: actions/setup-java@ad2b38190b15e4d6bdf0c97fb4fca8412226d287 # v5.3.0
+        uses: actions/setup-java@1bcf9fb12cf4aa7d266a90ae39939e61372fe520 # v5.4.0
         with:
           distribution: 'temurin'
           java-version: '21'
@@ -578,7 +578,7 @@ jobs:
 
       - name: Configure AWS Credentials
         if: ${{ steps.deployments.outputs.pushSnapshot == 'true' }}
-        uses: aws-actions/configure-aws-credentials@e7f100cf4c008499ea8adda475de1042d6975c7b # v6.2.0
+        uses: aws-actions/configure-aws-credentials@254c19bd240aabef8777f48595e9d2d7b972184b # v6.2.1
         with:
           aws-region: eu-west-1
           role-to-assume: "arn:aws:iam::${{ secrets.OR_AWS_DEVELOPERS_ACCOUNT_ID }}:role/${{ secrets.OR_GH_AWS_ECR_PUSH_ROLE }}"
@@ -603,7 +603,7 @@ jobs:
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
 
       - name: Yarn cache
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache@2c8a9bd7457de244a408f35966fab2fb45fda9c8 # v6.0.0
         if: steps.skip-cicd.outputs.value != 'true'
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
