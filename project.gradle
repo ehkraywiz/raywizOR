@@ -60,6 +60,16 @@ configurations.all {
 if (project == rootProject) {
 
     project.afterEvaluate {
+        tasks.configureEach { task ->
+            if (task.name in ['encryptFiles', 'decryptFiles']) {
+                task.notCompatibleWithConfigurationCache("GradleFileEncrypt stores javax.crypto.SecretKey/SecretKeySpec task state")
+            }
+
+            if (task.name in ['findSonatypeStagingRepository', 'closeSonatypeStagingRepository', 'releaseSonatypeStagingRepository', 'closeAndReleaseSonatypeStagingRepository' ]) {
+                // See: https://github.com/gradle-nexus/publish-plugin/issues/221
+                task.notCompatibleWithConfigurationCache("Gradle Nexus Publish plugin task keeps Gradle Task/Project state")
+            }
+        }
 
         if (rootProject.hasProperty("gradleFileEncrypt")) {
             println("File encryption plugin config found, configuring git pre commit hook and decrypt task dependency")
@@ -121,7 +131,7 @@ exit \$status
 
 // Configure Conditional plugins
 if (project == rootProject) {
-    apply plugin: "org.jetbrains.gradle.plugin.idea-ext"
+    pluginManager.apply('org.jetbrains.gradle.plugin.idea-ext')
 
     // Configure IDEA
     if (project.hasProperty("idea") && idea.project) {
@@ -143,7 +153,7 @@ if (project == rootProject) {
                     workingDirectory = projectDir.toString()
                 }
                 "Demo Setup"(Application) {
-                    moduleName = getProject().idea.module.name + ".extension.demo-setup.main"
+                    moduleName = getProject().idea.module.name + ".manager.main"
                     envs = [
                             OR_SETUP_TYPE: "demo"
                     ]
@@ -205,10 +215,11 @@ repositories {
 }
 
 // Eclipse needs help
-apply plugin: "eclipse"
+pluginManager.apply('eclipse')
+
 
 // Intellij needs help
-apply plugin: 'idea'
+pluginManager.apply('idea')
 // Use the same output directories in IDE as in gradle
 idea {
     module {
@@ -222,17 +233,9 @@ idea {
     }
 }
 
-def resolveProject(String path) {
-    project(path)
-}
-
-def resolveTask(String path) {
-    tasks.getByPath(path)
-}
-
 def getYarnInstallTask() {
     // Just use openremote repo yarn install
-    resolveTask(":yarnInstall")
+    tasks.getByPath(":yarnInstall")
 }
 
 /**
@@ -351,8 +354,6 @@ def createTSGeneratorConfig(boolean outputAPIClient, String outputFileName, Proj
 }
 
 ext {
-    resolveProject = this.&resolveProject
-    resolveTask = this.&resolveTask
     getYarnInstallTask = this.&getYarnInstallTask
     createTSGeneratorConfigForClient = this.&createTSGeneratorConfigForClient
     createTSGeneratorConfigForModel = this.&createTSGeneratorConfigForModel
