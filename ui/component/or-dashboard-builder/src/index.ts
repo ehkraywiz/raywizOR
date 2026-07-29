@@ -17,8 +17,7 @@ import {ListItem} from "@openremote/or-mwc-components/or-mwc-list";
 import {OrMwcTabItem} from "@openremote/or-mwc-components/or-mwc-tabs";
 import "@openremote/or-mwc-components/or-mwc-tabs";
 import {showSnackbar} from "@openremote/or-mwc-components/or-mwc-snackbar";
-import {i18next, translate} from "@openremote/or-translate";
-import {showOkCancelDialog} from "@openremote/or-mwc-components/or-mwc-dialog";
+import {i18next, translate} from "@openremote/or-translate"; 
 import {DashboardKeyEmitter} from "./or-dashboard-keyhandler";
 import {OrDashboardPreview} from "./or-dashboard-preview";
 import {WidgetManifest} from "./util/or-widget";
@@ -37,6 +36,7 @@ import {BarChartWidget} from "./widgets/barchart-widget";
 import {AlarmWidget} from "./widgets/alarm-widget";
 import {StatuslightWidget} from "./widgets/statuslight-widget";
 import {OrVaadinTextField} from "@openremote/or-vaadin-components/or-vaadin-text-field";
+import {getConfirmDialogContent, showConfirmDialog} from "@openremote/or-vaadin-components/or-vaadin-confirm-dialog";
 
 // language=CSS
 const styling = css`
@@ -319,7 +319,13 @@ export class OrDashboardBuilder extends translate(i18next)(LitElement) {
         this.keyEmitter.addListener('delete', (_e: KeyboardEvent) => {
             if(this.selectedWidgetId) {
                 const selectedWidget = this.selectedDashboard?.template?.widgets?.find(w => w.id == this.selectedWidgetId);
-                if(selectedWidget) { showOkCancelDialog(i18next.t('areYouSure'), i18next.t('dashboard.deleteWidgetWarning'), i18next.t('delete')).then((ok: boolean) => { if(ok) { this.deleteWidget(selectedWidget); }}); }
+                if(selectedWidget) {
+                    showConfirmDialog(this.shadowRoot!, html`
+                        <or-vaadin-confirm-dialog @confirm=${() => this.deleteWidget(selectedWidget)}>
+                            ${getConfirmDialogContent("error", "areYouSure", "dashboard.deleteWidgetWarning", "delete", "cancel")}
+                        </or-vaadin-confirm-dialog>
+                    `);
+                }
             }
         });
         this.keyEmitter.addListener('deselect', (_e: KeyboardEvent) => { this.deselectWidget(); });
@@ -718,9 +724,13 @@ export class OrDashboardBuilder extends translate(i18next)(LitElement) {
                                                         <span id="title" title="${selectedWidget?.displayName}">${selectedWidget?.displayName}</span>
                                                     </div>
                                                     <div id="sidebar-widget-headeractions">
-                                                        <or-vaadin-button theme="icon" @click=${() => showOkCancelDialog(i18next.t('areYouSure'), i18next.t('dashboard.deleteWidgetWarning'), i18next.t('delete')).then((ok: boolean) => {
-                                                            if(ok) { this.deleteWidget(selectedWidget!); }
-                                                        })}>
+                                                        <or-vaadin-button theme="icon" @click=${() => {
+                                                            showConfirmDialog(this.shadowRoot!, html`
+                                                                <or-vaadin-confirm-dialog @confirm=${() => this.deleteWidget(selectedWidget!)}>
+                                                                    ${getConfirmDialogContent("error", "areYouSure", "dashboard.deleteWidgetWarning", "delete", "cancel")}
+                                                                </or-vaadin-confirm-dialog>
+                                                            `)
+                                                        }}>
                                                             <or-icon icon="delete"></or-icon>
                                                         </or-vaadin-button>
                                                         <or-vaadin-button theme="icon" @click=${() => this.deselectWidget()}>

@@ -9,7 +9,7 @@ byteBuddy = "1.18.10"
 bluetooth = "0.64"
 californium = "3.14.0"
 calimero = "2.6"
-camel = "4.20.0"
+camel = "4.21.0"
 checkerframework = "4.2.1"
 classgraph = "4.8.184"
 corsFilter = "3.1"
@@ -48,7 +48,7 @@ junit = "6.1.0"
 keycloak = "25.0.3"
 micrometer = "1.17.0"
 mockito = "5.23.0"
-netty = "4.2.15.Final"
+netty = "4.2.16.Final"
 nexusPublish = "2.0.0"
 niftyModbus = "1.4.0"
 nimbusJoseJwt = "10.9.1"
@@ -199,4 +199,5 @@ axionRelease = { id = "pl.allegro.tech.build.axion-release", version.ref = "axio
 fileEncrypt = { id = "io.openremote.com.cherryperry.gradle-file-encrypt", version.ref = "fileEncrypt" }
 nexusPublish = { id = "io.github.gradle-nexus.publish-plugin", version.ref = "nexusPublish" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
+swagger = { id = "io.swagger.core.v3.swagger-gradle-plugin", version.ref = "swagger" }
 testLogger = { id = "com.adarshr.test-logger", version.ref = "testLogger" }
