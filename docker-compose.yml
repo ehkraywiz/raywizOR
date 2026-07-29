@@ -15,8 +15,8 @@ volumes:
 
 networks:
   default:
-  zmservice_zoneminder:
-    external: true
+  #zmservice_zoneminder:
+  #  external: true
 
 services:
   proxy:
@@ -24,7 +24,7 @@ services:
     restart: always
     networks:
       - default
-      - zmservice_zoneminder
+      #- zmservice_zoneminder
     depends_on:
       manager:
         condition: service_healthy

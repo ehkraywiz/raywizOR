@@ -26,5 +26,3 @@ if ($LASTEXITCODE -eq 0) #if build ok
         docker compose up -d # start opp
     }
 }
-
-
